@@ -10,9 +10,21 @@ knitr::opts_chunk$set(echo = TRUE)
 ## braunwald_get-transcripts.R
 * Script that gathers list of available transcripts from `childesr`
 * Creates a dataframe with only the columns needed going forwards; columns omitted:
-    + `language`, `corpus_id`, `target_child_id`, `collection_id`, and `pid`
+    + `language`, `corpus_id`, `collection_id`, and `pid`
     
 ## braunwald_get-utterances.R
 * Script that gathers list of utterances avaialble from `childesr`
 * Creates a dataframe with only the columns needed going forwards; columns ommited:
-    + `id`, `speaker_id`, `utterance_order`, `corpus_id`, `stem`, `part_of_speech`, `speaker_code`, `target_child_id`, `type`, `media_end`, `media_start`, `media_unit`, `collection_id`, `num_morphemes`, and `language`
+    + `id`, `utterance_order`, `corpus_id`, `num_tokens`, `stem`, `part_of_speech`, `speaker_code`, `type`, `media_end`, `media_start`, `media_unit`, `collection_id`, `num_morphemes`, and `language`
+    
+    
+## garvey -- this is a mess; will need to fix later
+* Child names are under 'speaker_name' instead of 'target_child_name' in raw utterances
+    + target child sex and age are also missing ..!
+* No speaker information is available in the raw transcripts
+
+## macwhinney -- same issue as garvey of multiple speakers
+
+## weist -- something weird is going on with speaker_name and target_child_name; check later
+
+## cornell -- target_child_sex is missing for some rows; raw transcripts df is missing some info
