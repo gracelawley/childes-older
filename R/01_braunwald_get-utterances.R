@@ -10,7 +10,6 @@ out_path = here("data/raw/braunwald_raw-utterances.csv")
 # Getting all utterances from childesr
 utterances <- get_utterances(collection = 'Eng-NA',
                              corpus = 'Braunwald',
-                             target_child = 'Laura',
                              role = 'Target_Child')
 
 # The database version used
@@ -23,10 +22,10 @@ utterances <- utterances %>%
 # Selecting only needed columns
 utterances <- utterances %>% 
   select(db_version, collection = collection_name,
-         corpus = corpus_name, child = target_child_name,
-         sex = target_child_sex, age = target_child_age,
-         speaker_role, num_tokens, utterance = gloss,
-         transcript_id)
+         corpus = corpus_name, speaker_role, 
+         child = target_child_name, sex = target_child_sex, 
+         age = target_child_age, num_tokens, 
+         utterance = gloss, transcript_id)
 
 # Write output file
 write.csv(utterances, out_path, row.names = FALSE)

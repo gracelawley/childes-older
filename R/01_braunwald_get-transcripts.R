@@ -9,8 +9,7 @@ out_path = here("data/raw/braunwald_raw-transcripts.csv")
 
 # Get transcript names
 transcripts <- get_transcripts(collection = 'Eng-NA',
-                               corpus = 'Braunwald',
-                               target_child = 'Laura')
+                               corpus = 'Braunwald')
 
 # The database version used
 version <- get_database_version()
