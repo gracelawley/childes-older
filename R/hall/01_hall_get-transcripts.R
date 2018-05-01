@@ -4,7 +4,7 @@ library(childesr)
 
 
 ## Output path -----------------------------------------------------
-out_path = here("data/raw/hall_raw-transcripts.csv")
+out_path = here("data/raw/hall/hall_transcripts.csv")
 ## -----------------------------------------------------------------
 
 # Get transcript names

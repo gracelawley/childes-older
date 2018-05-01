@@ -4,7 +4,7 @@ library(childesr)
 
 
 ## Output path -----------------------------------------------------
-out_path = here("data/raw/kuczaj_raw-utterances.csv")
+out_path = here("data/raw/kuczaj/kuczaj_utterances.csv")
 ## -----------------------------------------------------------------
 
 # Getting all utterances from childesr
