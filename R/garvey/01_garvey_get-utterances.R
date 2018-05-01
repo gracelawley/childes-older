@@ -22,8 +22,9 @@ utterances <- utterances %>%
 # Selecting only needed columns
 utterances <- utterances %>% 
   select(db_version, collection = collection_name,
-         corpus = corpus_name, speaker_role, 
-         child = speaker_name, num_tokens, 
+         corpus = corpus_name, speaker_role, speaker_name,
+         speaker_id, target_child_name, target_child_id,
+         target_child_sex, target_child_age, 
          utterance = gloss, transcript_id)
 
 # Write output file
