@@ -1,40 +1,29 @@
 
-#### 01\_kuczaj\_get-transcripts.R
+# Kuczaj Corpus
 
-  - Pulling down raw transcripts via the `childesr` package
+#### Number of transcripts:
 
-#### 01\_kuczaj\_get-utterances.R
+  - Raw = 210
+  - Filtered = 150
 
-  - Pulling down raw utterances via the `childesr` package
+#### The removed transcripts included:
 
-#### 02\_kuczaj\_filter-transcripts.R
+  - Those where the child fell outside of the age range of 36-96 months
 
-  - Filtering raw transcripts against the project specific criteria.
-      - Number of raw transcripts: 210
-      - Number after filtering: 150
-  - The removed transcripts included:
-      - Those that where the child fell outside of the age range of
-        36-96 months
+#### Number of utterances:
 
-#### 03\_kuczaj\_filter-utterances.R
+  - Raw = 31,958
+  - Filtered = 21,873
 
-  - Filtering out utterances that were in the transcripts that were
-    removed in the previous script, \`02\_kuczaj\_filter-transcripts.R’
-      - Number of raw utterances: 31,958
-      - Number after filtering: 21,873
+#### Number of tokens & types:
 
-#### 04\_kuczaj\_proc-utterances.R
+  - Tokens = 122,780
+  - Types = 3,801
 
-  - Processing utterances with `process_text()` from
-    `process_text_fxn.R`
+#### Top five most frequent tokens:
 
-#### 05\_kuczaj\_token-split.R
-
-  - Splitting utterances into tokens
-      - Number of tokens: 122,780
-  - Top five most frequent tokens:
-    1.  i -\> 7,272
-    2.  it – 3,716
-    3.  you - 3,528
-    4.  the - 3,047
-    5.  a - 2,754
+1.  i – 7,272
+2.  it – 3,716
+3.  you – 3,528
+4.  the – 3,047
+5.  a – 2,754

@@ -1,31 +1,30 @@
 
-## braunwald\_get-transcripts.R
+#### 01\_xxx\_get-transcripts.R
 
-  - Script that gathers list of available transcripts from `childesr`
-  - Creates a dataframe with only the columns needed going forwards;
-    columns omitted:
-      - `language`, `corpus_id`, `collection_id`, and `pid`
+  - Pulling down raw transcripts via the `childesr` package
 
-## braunwald\_get-utterances.R
+#### 01\_xxx\_get-utterances.R
 
-  - Script that gathers list of utterances avaialble from `childesr`
-  - Creates a dataframe with only the columns needed going forwards;
-    columns ommited:
-      - `id`, `utterance_order`, `corpus_id`, `num_tokens`, `stem`,
-        `part_of_speech`, `speaker_code`, `type`, `media_end`,
-        `media_start`, `media_unit`, `collection_id`, `num_morphemes`,
-        and `language`
+  - Pulling down raw utterances via the `childesr` package
 
-## garvey – this is a mess; will need to fix later
+#### 02\_xxx\_filter-transcripts.R
 
-  - Child names are under ‘speaker\_name’ instead of
-    ‘target\_child\_name’ in raw utterances
-      - target child sex and age are also missing ..\!
-  - No speaker information is available in the raw
-transcripts
+  - Filtering raw transcripts against the project specific criteria
 
-## macwhinney – same issue as garvey of multiple speakers
+#### 03\_xxx\_filter-utterances.R
 
-## weist – something weird is going on with speaker\_name and target\_child\_name; check later
+  - Filtering out utterances that were in the transcripts that were
+    removed in the previous script, \`02\_xxx\_filter-transcripts.R’
 
-## cornell – target\_child\_sex is missing for some rows; raw transcripts df is missing some info
+#### 04\_xxx\_proc-utterances.R
+
+  - Processing utterances with `process_text()` from
+    `process_text_fxn.R`
+
+#### 05\_xxx\_token-split.R
+
+  - Splitting utterances into tokens
+
+#### 06\_xxx\_type-count.R
+
+  - Grouping tokens into types and calculating frequency

@@ -2,29 +2,26 @@
 output: github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+#### 01_xxx_get-transcripts.R
+* Pulling down raw transcripts via the `childesr` package
+
+#### 01_xxx_get-utterances.R
+* Pulling down raw utterances via the `childesr` package
+
+#### 02_xxx_filter-transcripts.R
+* Filtering raw transcripts against the project specific criteria  
+
+#### 03_xxx_filter-utterances.R
+* Filtering out utterances that were in the transcripts that were removed in the previous script, `02_xxx_filter-transcripts.R'
+
+#### 04_xxx_proc-utterances.R
+* Processing utterances with `process_text()` from `process_text_fxn.R`
+
+#### 05_xxx_token-split.R
+* Splitting utterances into tokens
+
+#### 06_xxx_type-count.R
+* Grouping tokens into types and calculating frequency
 
 
-## braunwald_get-transcripts.R
-* Script that gathers list of available transcripts from `childesr`
-* Creates a dataframe with only the columns needed going forwards; columns omitted:
-    + `language`, `corpus_id`, `collection_id`, and `pid`
-    
-## braunwald_get-utterances.R
-* Script that gathers list of utterances avaialble from `childesr`
-* Creates a dataframe with only the columns needed going forwards; columns ommited:
-    + `id`, `utterance_order`, `corpus_id`, `num_tokens`, `stem`, `part_of_speech`, `speaker_code`, `type`, `media_end`, `media_start`, `media_unit`, `collection_id`, `num_morphemes`, and `language`
-    
-    
-## garvey -- this is a mess; will need to fix later
-* Child names are under 'speaker_name' instead of 'target_child_name' in raw utterances
-    + target child sex and age are also missing ..!
-* No speaker information is available in the raw transcripts
 
-## macwhinney -- same issue as garvey of multiple speakers
-
-## weist -- something weird is going on with speaker_name and target_child_name; check later
-
-## cornell -- target_child_sex is missing for some rows; raw transcripts df is missing some info

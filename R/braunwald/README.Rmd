@@ -1,36 +1,28 @@
 ---
 output: github_document
 ---
+# Braunwald Corpus
 
-#### 01_braunwald_get-transcripts.R
-* Pulling down raw transcripts via the `childesr` package
+#### Number of transcripts:
+* Raw = 900
+* Filtered = 72
 
-#### 01_braunwald_get-utterances.R
-* Pulling down raw utterances via the `childesr` package
+#### The removed transcripts included:  
+* Those that where the child fell outside of the age range of 36-96 months  
+* Those that were a part of the handwritten diary section of the study (the files in the `0diary` subfolder)
 
-#### 02_braunwald_filter-transcripts.R
-* Filtering raw transcripts against the project specific criteria. 
-  + Number of raw transcripts: 900
-  + Number after filtering: 72
-* The removed transcripts included:  
-  + Those that where the child fell outside of the age range of 36-96 months  
-  + Those that were a part of the handwritten diary section of the study 
-    - The files in the `0diary` subfolder
+#### Number of utterances:
+* Raw = 39,750
+* Filtered = 12,084
 
-#### 03_braunwald_filter-utterances.R
-* Filtering out utterances that were in the transcripts that were removed in the previous script, `02_braunwald_filter-transcripts.R'
-  + Number of raw utterances: 39,750
-  + Number after filtering: 12,084
+#### Number of tokens and types:
+* Tokens = 34,821
+* Types = 2,250
+  
 
-#### 04_braunwald_proc-utterances.R
-* Processing utterances with `process_text()` from `process_text_fxn.R`
-
-#### 05_braunwald_token-split.R
-* Splitting utterances into tokens
-  + Number of tokens: 34,821
-* Top five most frequent tokens:
-  1. i -- 1,939
-  2. you -- 895
-  3. it -- 890
-  4. s -- 856
-  5. the -- 791
+#### Top five most frequent tokens:
+1. i -- 1,939
+2. you -- 895
+3. it -- 890
+4. s -- 856
+5. the -- 791
