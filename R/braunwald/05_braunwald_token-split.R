@@ -20,12 +20,6 @@ tokens <- proc_utterances %>%
                 pattern = " +") %>% 
   filter(word != "")
 
-# Quick frequency table aside
-freq <- tokens %>% 
-  group_by(word) %>% 
-  summarise(n = n()) %>% 
-  arrange(desc(n))
-
 
 # Writing output file
 write.csv(tokens, out_path, row.names = FALSE)
