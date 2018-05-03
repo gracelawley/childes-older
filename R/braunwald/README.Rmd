@@ -1,0 +1,19 @@
+---
+output: github_document
+---
+
+#### 01_braunwald_get-transcripts.R
+* Pulling down raw transcripts via the `childesr` package
+
+#### 01_braunwald_get-utterances.R
+* Pulling down raw utterances via the `childesr` package
+
+#### 02_braunwald_filter-transcripts.R
+* Filtering raw transcripts against the project specific criteria.   
+* The removed transcripts included:  
+  + Those that where the child fell outside of the age range of 36-96 months  
+  + Those that were a part of the handwritten diary section of the study 
+    - The files in the `0diary` subfolder
+
+#### 03_braunwald_filter-utterances.R
+* Filtering out utterances that were in the transcripts that were removed in the previous script, `02_braunwald_filter-transcripts.R'
