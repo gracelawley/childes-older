@@ -19,14 +19,6 @@ version <- get_database_version()
 utterances <- utterances %>% 
   mutate(db_version = version)
 
-# Selecting only needed columns
-utterances <- utterances %>% 
-  select(db_version, collection = collection_name,
-         corpus = corpus_name, speaker_role, speaker_name,
-         speaker_id, target_child_name, target_child_id,
-         target_child_sex, target_child_age, 
-         utterance = gloss, transcript_id)
-
 # Write output file
 write.csv(utterances, out_path, row.names = FALSE)
 

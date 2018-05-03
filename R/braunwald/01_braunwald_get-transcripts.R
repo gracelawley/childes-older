@@ -18,13 +18,5 @@ version <- get_database_version()
 transcripts <- transcripts %>% 
   mutate(db_version = version)
 
-# Selecting only needed columns=
-transcripts <- transcripts %>% 
-  select(db_version, collection = collection_name,
-         corpus = corpus_name, target_child = target_child_name,
-         target_child_id, sex = target_child_sex, 
-         age = target_child_age, date, 
-         file = filename, transcript_id)
-
 # Write output file
 write.csv(transcripts, out_path, row.names = FALSE)
