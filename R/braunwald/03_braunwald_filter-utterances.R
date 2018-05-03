@@ -17,6 +17,7 @@ out_path = here("data/processed/braunwald_filtered-utterances.csv")
 filtered_transcripts <- read_csv(transcripts_in_path)
 raw_utterances <- read_csv(utterances_in_path)
 
+
 # Some light reorganization
 raw_utterances <- raw_utterances %>% 
   select(-id, -speaker_id, -utterance_order, -corpus_id,
@@ -31,9 +32,11 @@ raw_utterances <- raw_utterances %>%
          utterance, transcript_id) %>% 
   drop_na(utterance)
 
+
 # Filtering out non-matches 
 filtered_utterances <- raw_utterances %>% 
   inner_join(filtered_transcripts)
+
 
 # Some more reorganizing
 filtered_utterances <- filtered_utterances %>% 
@@ -41,6 +44,7 @@ filtered_utterances <- filtered_utterances %>%
   select(-utterance, everything()) %>% # moving utterance to far right
   arrange(age)
   
+
 # Writing output file
 write.csv(filtered_utterances, out_path, row.names = FALSE)
 

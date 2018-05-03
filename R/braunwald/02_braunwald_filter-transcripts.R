@@ -14,11 +14,15 @@ out_path = here("data/processed/braunwald_filtered-transcripts.csv")
 # Read in raw transcript csv
 raw_transcripts <- read_csv(in_path)
 
-# Filtering for matches based on the project criteria
+
+#Filtering for matches based on the project criteria
 filtered_transcripts <- raw_transcripts %>% 
-  filter(target_child_age >= 36.0 & target_child_age <= 96.0,
-         str_count(filename, '0diary') == 0) %>% 
+  # matching age range criterion
+  filter(target_child_age >= 36.0 & target_child_age <= 96.0) %>%
+  # remove files from handwritten diary section
+  filter(str_count(filename, '0diary') == 0) %>% 
   arrange(target_child_age)
+
 
 # Some light reorganization
 filtered_transcripts <- filtered_transcripts %>%

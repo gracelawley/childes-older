@@ -12,10 +12,9 @@ in_path = here("data/processed/braunwald_filtered-utterances.csv")
 out_path = here("data/processed/braunwald_proc-utterances.csv")
 ## -----------------------------------------------------------------
 
+
 # Loading text processing function
 source("R/process_text_fxn.R")
-
-
 
 # Importing data
 filtered_utterances <- read_csv(in_path)

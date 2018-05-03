@@ -9,7 +9,9 @@
 
 #### 02\_braunwald\_filter-transcripts.R
 
-  - Filtering raw transcripts against the project specific criteria.  
+  - Filtering raw transcripts against the project specific criteria.
+      - Number of raw transcripts: 900
+      - Number after filtering: 72
   - The removed transcripts included:
       - Those that where the child fell outside of the age range of
         36-96 months  
@@ -22,6 +24,8 @@
   - Filtering out utterances that were in the transcripts that were
     removed in the previous script,
     \`02\_braunwald\_filter-transcripts.R’
+      - Number of raw utterances: 39,750
+      - Number after filtering: 12,084
 
 #### 04\_braunwald\_proc-utterances.R
 
@@ -31,3 +35,10 @@
 #### 05\_braunwald\_token-split.R
 
   - Splitting utterances into tokens
+      - Number of tokens: 34,821
+  - Top five most frequent tokens:
+    1.  i – 1,939
+    2.  you – 895
+    3.  it – 890
+    4.  s – 856
+    5.  the – 791
