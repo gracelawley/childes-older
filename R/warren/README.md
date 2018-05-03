@@ -14,6 +14,7 @@
 
   - Raw = 3,561
   - Filtered = 2,005
+  - Processed = 1,983
 
 #### Number of tokens & types:
 

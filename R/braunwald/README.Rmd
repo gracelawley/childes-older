@@ -14,6 +14,7 @@ output: github_document
 #### Number of utterances:
 * Raw = 39,750
 * Filtered = 12,084
+* Processed = 10,234
 
 #### Number of tokens and types:
 * Tokens = 34,821
