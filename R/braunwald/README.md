@@ -22,3 +22,12 @@
   - Filtering out utterances that were in the transcripts that were
     removed in the previous script,
     \`02\_braunwald\_filter-transcripts.R’
+
+#### 04\_braunwald\_proc-utterances.R
+
+  - Processing utterances with `process_text()` from
+    `process_text_fxn.R`
+
+#### 05\_braunwald\_token-split.R
+
+  - Splitting utterances into tokens

@@ -4,11 +4,11 @@ library(readr)
 library(stringr)
 
 ## Input path ------------------------------------------------------
-in_path = here("data/raw/braunwald/braunwald_transcripts.csv")
+in_path = here("data/raw/braunwald_transcripts.csv")
 ## -----------------------------------------------------------------
 
 ## Output path -----------------------------------------------------
-out_path = here("data/processed/braunwald/braunwald_filtered-transcripts.csv")
+out_path = here("data/processed/braunwald_filtered-transcripts.csv")
 ## -----------------------------------------------------------------
 
 # Read in raw transcript csv

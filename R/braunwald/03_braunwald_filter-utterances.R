@@ -5,8 +5,8 @@ library(stringr)
 library(tidyr)
 
 ## Input path ------------------------------------------------------
-transcripts_in_path = here("data/processed/braunwald/braunwald_filtered-transcripts.csv")
-utterances_in_path = here("data/raw/braunwald/braunwald_utterances.csv")
+transcripts_in_path = here("data/processed/braunwald_filtered-transcripts.csv")
+utterances_in_path = here("data/raw/braunwald_utterances.csv")
 ## -----------------------------------------------------------------
 
 ## Output path -----------------------------------------------------

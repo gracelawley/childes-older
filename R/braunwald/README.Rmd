@@ -17,3 +17,9 @@ output: github_document
 
 #### 03_braunwald_filter-utterances.R
 * Filtering out utterances that were in the transcripts that were removed in the previous script, `02_braunwald_filter-transcripts.R'
+
+#### 04_braunwald_proc-utterances.R
+* Processing utterances with `process_text()` from `process_text_fxn.R`
+
+#### 05_braunwald_token-split.R
+* Splitting utterances into tokens

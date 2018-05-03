@@ -4,7 +4,7 @@ library(childesr)
 
 
 ## Output path -----------------------------------------------------
-out_path = here("data/raw/braunwald/braunwald_utterances.csv")
+out_path = here("data/raw/braunwald_utterances.csv")
 ## -----------------------------------------------------------------
 
 # Getting all utterances from childesr
