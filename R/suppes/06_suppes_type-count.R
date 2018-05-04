@@ -3,16 +3,15 @@ library(readr)
 library(dplyr)
 
 ## Input path ------------------------------------------------------
-in_path = here("data/processed/weist_tokens.csv")
+in_path = here("data/processed/suppes_tokens.csv")
 ## -----------------------------------------------------------------
 
 ## Output path -----------------------------------------------------
-out_path = here("data/processed/weist_type-count.csv")
+out_path = here("data/processed/suppes_type-count.csv")
 ## -----------------------------------------------------------------
 
 # Importing data
-tokens <- read_csv(in_path, col_types = 
-                     cols(age = col_double()))
+tokens <- read_csv(in_path)
 
 # Some light reorganization
 types <- tokens %>% 
