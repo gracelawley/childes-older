@@ -20,6 +20,8 @@
 
   - Processing utterances with `process_text()` from
     `process_text_fxn.R`
+  - The decrease in total number of utterances that occurs during this
+    step is due to empty rows being removed
 
 #### 05\_xxx\_token-split.R
 

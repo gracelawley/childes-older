@@ -16,6 +16,7 @@ output: github_document
 
 #### 04_xxx_proc-utterances.R
 * Processing utterances with `process_text()` from `process_text_fxn.R`
+* The decrease in total number of utterances that occurs during this step is due to empty rows being removed
 
 #### 05_xxx_token-split.R
 * Splitting utterances into tokens

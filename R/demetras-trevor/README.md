@@ -1,9 +1,9 @@
 
-# Warren Corpus
+# Demetras-Trevor Corpus
 
 #### Number of transcripts:
 
-  - Raw = 20
+  - Raw = 26
   - Filtered = 11
 
 #### Transcripts removed:
@@ -12,20 +12,20 @@
 
 #### Number of utterances:
 
-  - Raw = 3,561
-  - Filtered = 2,005
-  - Processed = 1,983
+  - Raw = 6,971
+  - Filtered = 2,515
+  - Processed = 2,459
 
 #### Number of tokens & types:
 
-  - Tokens = 8,101
-  - Types = 1,261
-  - Type-Token Ratio = 0.1556598
+  - Tokens = 10,334
+  - Types = 1,030
+  - Type-Token Ratio = 0.099671
 
 #### Top five most frequent tokens:
 
-1.  i – 377
-2.  and – 226
-3.  a – 217
-4.  the – 213
-5.  it – 184
+1.  i – 316
+2.  the – 282
+3.  it – 264
+4.  you – 261
+5.  and – 212

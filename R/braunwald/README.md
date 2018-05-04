@@ -6,7 +6,7 @@
   - Raw = 900
   - Filtered = 72
 
-#### The removed transcripts included:
+#### Transcripts removed:
 
   - Those that where the child fell outside of the age range of 36-96
     months  

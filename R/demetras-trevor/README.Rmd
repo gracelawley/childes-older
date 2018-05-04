@@ -4,23 +4,27 @@ output: github_document
 # Demetras-Trevor Corpus
 
 #### Number of transcripts:
-* Raw = 
-* Filtered = 
+* Raw = 26
+* Filtered = 11
 
-#### The removed transcripts included:
+#### Transcripts removed:  
 * Those where the child fell outside of the age range of 36-96 months
 
 #### Number of utterances:
-* Raw = 
-* Filtered =
-* Processed =
+* Raw = 6,971
+* Filtered = 2,515
+* Processed = 2,459
   
 #### Number of tokens & types:
-* Tokens = 
-* Types = 
-* Type-Token Ratio = `r `
+* Tokens = 10,334
+* Types = 1,030
+* Type-Token Ratio = `r 1030/10334`
 
 #### Top five most frequent tokens:
-
+1. i -- 316
+2. the -- 282
+3. it -- 264
+4. you -- 261
+5. and -- 212
 
 

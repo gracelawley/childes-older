@@ -4,13 +4,12 @@ library(childesr)
 
 
 ## Output path -----------------------------------------------------
-out_path = here("data/raw/macwhinney_transcripts.csv")
+out_path = here("data/raw/weist_transcripts.csv")
 ## -----------------------------------------------------------------
 
 # Get transcript names
-### Note the NA values for target_child, etc!!!
 transcripts <- get_transcripts(collection = 'Eng-NA',
-                               corpus = 'MacWhinney')
+                               corpus = 'Weist')
 
 # The database version used
 version <- get_database_version()

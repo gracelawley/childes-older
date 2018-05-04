@@ -4,14 +4,14 @@ library(childesr)
 
 
 ## Output path -----------------------------------------------------
-out_path = here("data/raw/macwhinney_utterances.csv")
+out_path = here("data/raw/weist_utterances.csv")
 ## -----------------------------------------------------------------
 
 # Getting all utterances from childesr
-### Note the NA values for target_child, etc!!!
+## 'Child' included in role type to catch the mismarked target children
 utterances <- get_utterances(collection = 'Eng-NA',
-                             corpus = 'MacWhinney',
-                             role = 'Target_Child')
+                             corpus = 'Weist',
+                             role = c('Target_Child', 'Child')) 
 
 # The database version used
 version <- get_database_version()
@@ -22,5 +22,4 @@ utterances <- utterances %>%
 
 # Write output file
 write.csv(utterances, out_path, row.names = FALSE)
-
 
