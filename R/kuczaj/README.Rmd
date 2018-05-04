@@ -18,6 +18,7 @@ output: github_document
 #### Number of tokens & types:
 * Tokens = 122,780
 * Types = 3,801
+* Type-Token Ratio = `r 3801/122780`
   
 #### Top five most frequent tokens: 
 1. i -- 7,272

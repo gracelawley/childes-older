@@ -20,6 +20,7 @@
 
   - Tokens = 8,101
   - Types = 1,261
+  - Type-Token Ratio = 0.1556598
 
 #### Top five most frequent tokens:
 

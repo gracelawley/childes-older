@@ -1,30 +1,30 @@
 ---
 output: github_document
 ---
-# Warren Corpus
+# Clark Corpus
 
 #### Number of transcripts:
-* Raw = 20
-* Filtered = 11
+* Raw = 39
+* Filtered = 39
 
 #### The removed transcripts included:
 * Those where the child fell outside of the age range of 36-96 months
 
 #### Number of utterances:
-* Raw = 3,561
-* Filtered = 2,005
-* Processed = 1,983
+* Raw = 75,270
+* Filtered = 75,270
+* Processed = 74,310
   
 #### Number of tokens & types:
-* Tokens = 8,101
-* Types = 1,261
-* Type-Token Ratio = `r 1261/8101`
+* Tokens = 319,735
+* Types = 10,635
+* Type-Token Ratio = `r 10635/319735`
 
 #### Top five most frequent tokens:
-1. i -- 377
-2. and -- 226
-3. a -- 217
-4. the -- 213
-5. it -- 184
+1. i -- 17,995
+2. you -- 10,653
+3. it -- 8,612
+4. the -- 6156
+5. s -- 6,140
 
 
