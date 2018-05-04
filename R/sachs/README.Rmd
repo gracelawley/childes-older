@@ -17,15 +17,24 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #### Number of utterances:
 * Raw = 17,242
-* Filtered =
-* Processed =
+* Filtered = 3,614
+* Processed = 3,487
   
 #### Number of tokens & types:
-* Tokens = 
-* Types = 
-* Type-Token Ratio = `r `
+* Tokens = 13,634
+* Types = 1,317
+* Type-Token Ratio = `r 1317/13634`
 
 #### Top five most frequent tokens:
+```{r echo = FALSE, message = FALSE}
+library(readr)
+library(knitr)
+library(dplyr)
 
+types <- read_csv('../../data/processed/sachs_type-count.csv')
+head(types, n=5) %>% 
+  kable(format = 'html', row.names = TRUE)
+
+```
 
 
