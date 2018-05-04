@@ -9,8 +9,8 @@ process_text <- function(text){
   
   text <- text %>% 
     # between words
-    str_replace_all("_", "") %>% 
-    str_replace_all("\\+", "") %>% 
+    str_replace_all("_", " ") %>% 
+    str_replace_all("\\+", " ") %>% 
     # contractions
     str_replace_all("won't", "wont") %>% 
     str_replace_all("can't", "can nt") %>% 
