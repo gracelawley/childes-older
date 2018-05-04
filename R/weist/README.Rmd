@@ -1,6 +1,11 @@
 ---
 output: github_document
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 # Weist Corpus
 
 #### Number of transcripts:
@@ -18,16 +23,21 @@ output: github_document
 * Processed = 24,539
   
 #### Number of tokens & types:
-* Tokens = 115,780
-* Types = 4,210
-* Type-Token Ratio = `r 4210/115780`
+* Tokens = 116,390
+* Types = 4,162
+* Type-Token Ratio = `r 4162/116390`
 
 #### Top five most frequent tokens:
-1. i -- 5936
-2. the -- 3313
-3. it -- 3093
-4. s -- 3048
-5. yeah -- 3037
+```{r echo = FALSE, message = FALSE}
+library(readr)
+library(knitr)
+library(dplyr)
+
+types <- read_csv('../../data/processed/weist_type-count.csv')
+head(types, n=5) %>% 
+  kable(format = 'html', row.names = TRUE)
+
+```
 
 
 #### <span style="color:red">Note!</span>

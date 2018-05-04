@@ -1,12 +1,10 @@
 
-# Weist Corpus
+# Suppes Corpus
 
 #### Number of transcripts:
 
-  - Raw = 183
-      - Untranscribed = 3
-      - Mismarked ‘role’ = 28
-  - Filtered = 99
+  - Raw = 52
+  - Filtered = 15
 
 #### Transcripts removed:
 
@@ -14,15 +12,15 @@
 
 #### Number of utterances:
 
-  - Raw = 46,766
-  - Filtered = 24,863
-  - Processed = 24,539
+  - Raw = 33,181
+  - Filtered = 8,763
+  - Processed = 8,612
 
 #### Number of tokens & types:
 
-  - Tokens = 116,390
-  - Types = 4,162
-  - Type-Token Ratio = 0.0357591
+  - Tokens = 34,384
+  - Types = 1,582
+  - Type-Token Ratio = 0.0460098
 
 #### Top five most frequent tokens:
 
@@ -94,19 +92,19 @@ Eng-NA
 
 <td style="text-align:left;">
 
-Weist
+Suppes
 
 </td>
 
 <td style="text-align:left;">
 
-i
+the
 
 </td>
 
 <td style="text-align:right;">
 
-5936
+1223
 
 </td>
 
@@ -134,19 +132,19 @@ Eng-NA
 
 <td style="text-align:left;">
 
-Weist
+Suppes
 
 </td>
 
 <td style="text-align:left;">
 
-the
+i
 
 </td>
 
 <td style="text-align:right;">
 
-3327
+1138
 
 </td>
 
@@ -174,19 +172,19 @@ Eng-NA
 
 <td style="text-align:left;">
 
-Weist
+Suppes
 
 </td>
 
 <td style="text-align:left;">
 
-it
+s
 
 </td>
 
 <td style="text-align:right;">
 
-3093
+1073
 
 </td>
 
@@ -214,19 +212,19 @@ Eng-NA
 
 <td style="text-align:left;">
 
-Weist
+Suppes
 
 </td>
 
 <td style="text-align:left;">
 
-s
+this
 
 </td>
 
 <td style="text-align:right;">
 
-3050
+853
 
 </td>
 
@@ -254,19 +252,19 @@ Eng-NA
 
 <td style="text-align:left;">
 
-Weist
+Suppes
 
 </td>
 
 <td style="text-align:left;">
 
-yeah
+a
 
 </td>
 
 <td style="text-align:right;">
 
-3037
+813
 
 </td>
 
@@ -275,17 +273,3 @@ yeah
 </tbody>
 
 </table>
-
-#### <span style="color:red">Note\!</span>
-
-For 28 of the 183 raw transcripts, the ‘role’ of the target child is
-marked as ‘Child’, rather than the expected ‘Target\_Child’. Because of
-this, information about the target child’s age, sex, and id are marked
-as ‘NA’. To remedy this, ‘Child’ is included in as an option for ‘role’
-in `get_utterances()`, in `01_weist_get-utterances.R`. The missing
-values were then reconstructed in `01_weist_filter-transcripts.R`. The
-reconstructed ages did not take into account days, only months and
-years.
-
-Also, 3 of the transcript files did not have a transcription attached to
-them and were subsequently removed during the filtering step.

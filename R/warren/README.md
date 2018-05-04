@@ -18,14 +18,258 @@
 
 #### Number of tokens & types:
 
-  - Tokens = 8,101
-  - Types = 1,261
-  - Type-Token Ratio = 0.1556598
+  - Tokens = 8,158
+  - Types = 1,253
+  - Type-Token Ratio = 0.1535916
 
 #### Top five most frequent tokens:
 
-1.  i – 377
-2.  and – 226
-3.  a – 217
-4.  the – 213
-5.  it – 184
+<table>
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+</th>
+
+<th style="text-align:right;">
+
+db\_version
+
+</th>
+
+<th style="text-align:left;">
+
+collection
+
+</th>
+
+<th style="text-align:left;">
+
+corpus
+
+</th>
+
+<th style="text-align:left;">
+
+word
+
+</th>
+
+<th style="text-align:right;">
+
+n
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+2018.1
+
+</td>
+
+<td style="text-align:left;">
+
+Eng-NA
+
+</td>
+
+<td style="text-align:left;">
+
+Warren
+
+</td>
+
+<td style="text-align:left;">
+
+i
+
+</td>
+
+<td style="text-align:right;">
+
+377
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+2018.1
+
+</td>
+
+<td style="text-align:left;">
+
+Eng-NA
+
+</td>
+
+<td style="text-align:left;">
+
+Warren
+
+</td>
+
+<td style="text-align:left;">
+
+and
+
+</td>
+
+<td style="text-align:right;">
+
+226
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+2018.1
+
+</td>
+
+<td style="text-align:left;">
+
+Eng-NA
+
+</td>
+
+<td style="text-align:left;">
+
+Warren
+
+</td>
+
+<td style="text-align:left;">
+
+a
+
+</td>
+
+<td style="text-align:right;">
+
+217
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+2018.1
+
+</td>
+
+<td style="text-align:left;">
+
+Eng-NA
+
+</td>
+
+<td style="text-align:left;">
+
+Warren
+
+</td>
+
+<td style="text-align:left;">
+
+the
+
+</td>
+
+<td style="text-align:right;">
+
+213
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+5
+
+</td>
+
+<td style="text-align:right;">
+
+2018.1
+
+</td>
+
+<td style="text-align:left;">
+
+Eng-NA
+
+</td>
+
+<td style="text-align:left;">
+
+Warren
+
+</td>
+
+<td style="text-align:left;">
+
+it
+
+</td>
+
+<td style="text-align:right;">
+
+184
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>

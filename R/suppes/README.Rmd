@@ -1,26 +1,41 @@
 ---
 output: github_document
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 # Suppes Corpus
 
 #### Number of transcripts:
-* Raw = 
-* Filtered = 
+* Raw = 52
+* Filtered = 15
 
 #### Transcripts removed:  
 * Those where the child fell outside of the age range of 36-96 months
 
 #### Number of utterances:
-* Raw = 
-* Filtered =
-* Processed =
+* Raw = 33,181
+* Filtered = 8,763
+* Processed = 8,612
   
 #### Number of tokens & types:
-* Tokens = 
-* Types = 
-* Type-Token Ratio = `r `
+* Tokens = 34,384
+* Types = 1,582
+* Type-Token Ratio = `r 1582/34384`
 
 #### Top five most frequent tokens:
+```{r echo = FALSE, message = FALSE}
+library(readr)
+library(knitr)
+library(dplyr)
+
+types <- read_csv('../../data/processed/suppes_type-count.csv')
+head(types, n=5) %>% 
+  kable(format = 'html', row.names = TRUE)
+
+```
 
 
 

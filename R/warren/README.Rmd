@@ -16,15 +16,20 @@ output: github_document
 * Processed = 1,983
   
 #### Number of tokens & types:
-* Tokens = 8,101
-* Types = 1,261
-* Type-Token Ratio = `r 1261/8101`
+* Tokens = 8,158
+* Types = 1,253
+* Type-Token Ratio = `r 1253/8158`
 
 #### Top five most frequent tokens:
-1. i -- 377
-2. and -- 226
-3. a -- 217
-4. the -- 213
-5. it -- 184
+```{r echo = FALSE, message = FALSE}
+library(readr)
+library(knitr)
+library(dplyr)
+
+types <- read_csv('../../data/processed/warren_type-count.csv')
+head(types, n=5) %>% 
+  kable(format = 'html', row.names = TRUE)
+
+```
 
 
