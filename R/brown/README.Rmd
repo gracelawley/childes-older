@@ -1,6 +1,11 @@
 ---
 output: github_document
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 # Brown Corpus
 
 #### Number of transcripts:
@@ -16,15 +21,19 @@ output: github_document
 * Processed = 55,050
   
 #### Number of tokens & types:
-* Tokens = 514,718
-* Types = 4,976
-* Type-Token Ratio = `r 4976/514718`
+* Tokens = 216,801
+* Types = 4,769
+* Type-Token Ratio = `r 4769/216801`
 
 #### Top five most frequent tokens:
-1. i -- 12,403
-2. it -- 6,968
-3. a -- 6,766
-4. you -- 5,718
-5. s -- 4,966
+```{r echo = FALSE, message = FALSE}
+library(readr)
+library(knitr)
+library(dplyr)
 
+types <- read_csv('../../data/processed/brown_type-count.csv')
+head(types, n=5) %>% 
+  kable(format = 'html', row.names = TRUE)
+
+```
 

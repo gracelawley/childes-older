@@ -1,6 +1,11 @@
 ---
 output: github_document
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 # Braunwald Corpus
 
 #### Number of transcripts:
@@ -17,14 +22,19 @@ output: github_document
 * Processed = 10,234
 
 #### Number of tokens and types:
-* Tokens = 34,821
-* Types = 2,250
-* Type-Token Ratio = `r 2250/34821`
+* Tokens = 35,028
+* Types = 2,218
+* Type-Token Ratio = `r 2218/35028`
   
 
 #### Top five most frequent tokens:
-1. i -- 1,939
-2. you -- 895
-3. it -- 890
-4. s -- 856
-5. the -- 791
+```{r echo = FALSE, message = FALSE}
+library(readr)
+library(knitr)
+library(dplyr)
+
+types <- read_csv('../../data/processed/braunwald_type-count.csv')
+head(types, n=5) %>% 
+  kable(format = 'html', row.names = TRUE)
+
+```

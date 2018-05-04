@@ -1,6 +1,11 @@
 ---
 output: github_document
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 # Bloom 1970 Corpus
 
 #### Number of transcripts:
@@ -16,15 +21,19 @@ output: github_document
 * Processed = 2,080
   
 #### Number of tokens & types:
-* Tokens = 7,877
-* Types = 731
-* Type-Token Ratio = `r 731/7877`
+* Tokens = 7,965
+* Types = 719
+* Type-Token Ratio = `r 719/7965`
 
 #### Top five most frequent tokens:
-1. this -- 310
-2. i -- 277
-3. it -- 276
-4. s -- 275
-5. the -- 224
+```{r echo = FALSE, message = FALSE}
+library(readr)
+library(knitr)
+library(dplyr)
 
+types <- read_csv('../../data/processed/bloom1970_type-count.csv')
+head(types, n=5) %>% 
+  kable(format = 'html', row.names = TRUE)
+
+```
 
