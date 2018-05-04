@@ -1,6 +1,11 @@
 ---
 output: github_document
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 # Kuczaj Corpus
 
 #### Number of transcripts:
@@ -16,13 +21,19 @@ output: github_document
 * Processed = 21,859
 
 #### Number of tokens & types:
-* Tokens = 122,780
-* Types = 3,801
-* Type-Token Ratio = `r 3801/122780`
+* Tokens = 123,791
+* Types = 3,734
+* Type-Token Ratio = `r 3734/123791`
   
 #### Top five most frequent tokens: 
-1. i -- 7,272
-2. it -- 3,716
-3. you -- 3,528
-4. the -- 3,047
-5. a -- 2,754
+```{r echo = FALSE, message = FALSE}
+library(readr)
+library(knitr)
+library(dplyr)
+
+types <- read_csv('../../data/processed/kuczaj_type-count.csv')
+head(types, n=5) %>% 
+  kable(format = 'html', row.names = TRUE)
+
+```
+

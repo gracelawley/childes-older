@@ -20,17 +20,261 @@
 
 #### Number of tokens & types:
 
-  - Tokens = 104,170
-  - Types = 4,431
-  - Type-Token Ratio = 0.0425362
+  - Tokens = 105,353
+  - Types = 4,325
+  - Type-Token Ratio = 0.0410525
 
 #### Top five most frequent tokens:
 
-1.  i – 4,847
-2.  and – 3,564
-3.  the – 3,260
-4.  you – 3,008
-5.  yeah – 2,219
+<table>
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+</th>
+
+<th style="text-align:right;">
+
+db\_version
+
+</th>
+
+<th style="text-align:left;">
+
+collection
+
+</th>
+
+<th style="text-align:left;">
+
+corpus
+
+</th>
+
+<th style="text-align:left;">
+
+word
+
+</th>
+
+<th style="text-align:right;">
+
+n
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+1
+
+</td>
+
+<td style="text-align:right;">
+
+2018.1
+
+</td>
+
+<td style="text-align:left;">
+
+Eng-NA
+
+</td>
+
+<td style="text-align:left;">
+
+MacWhinney
+
+</td>
+
+<td style="text-align:left;">
+
+i
+
+</td>
+
+<td style="text-align:right;">
+
+4864
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+2
+
+</td>
+
+<td style="text-align:right;">
+
+2018.1
+
+</td>
+
+<td style="text-align:left;">
+
+Eng-NA
+
+</td>
+
+<td style="text-align:left;">
+
+MacWhinney
+
+</td>
+
+<td style="text-align:left;">
+
+and
+
+</td>
+
+<td style="text-align:right;">
+
+3569
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+3
+
+</td>
+
+<td style="text-align:right;">
+
+2018.1
+
+</td>
+
+<td style="text-align:left;">
+
+Eng-NA
+
+</td>
+
+<td style="text-align:left;">
+
+MacWhinney
+
+</td>
+
+<td style="text-align:left;">
+
+the
+
+</td>
+
+<td style="text-align:right;">
+
+3263
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+4
+
+</td>
+
+<td style="text-align:right;">
+
+2018.1
+
+</td>
+
+<td style="text-align:left;">
+
+Eng-NA
+
+</td>
+
+<td style="text-align:left;">
+
+MacWhinney
+
+</td>
+
+<td style="text-align:left;">
+
+you
+
+</td>
+
+<td style="text-align:right;">
+
+3030
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+5
+
+</td>
+
+<td style="text-align:right;">
+
+2018.1
+
+</td>
+
+<td style="text-align:left;">
+
+Eng-NA
+
+</td>
+
+<td style="text-align:left;">
+
+MacWhinney
+
+</td>
+
+<td style="text-align:left;">
+
+to
+
+</td>
+
+<td style="text-align:right;">
+
+2282
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 #### <span style="color:red">Note\!</span>
 

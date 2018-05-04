@@ -1,6 +1,11 @@
 ---
 output: github_document
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 # Hall Corpus
 
 #### Number of transcripts:
@@ -16,15 +21,19 @@ output: github_document
 * Processed = 74,310
   
 #### Number of tokens & types:
-* Tokens = 319,735
-* Types = 10,635
-* Type-Token Ratio = `r 10635/319735`
+* Tokens = 321,581
+* Types = 10,529
+* Type-Token Ratio = `r 10529/321581`
 
 #### Top five most frequent tokens:
-1. i -- 17,995
-2. you -- 10,653
-3. it -- 8,612
-4. the -- 6156
-5. s -- 6,140
+```{r echo = FALSE, message = FALSE}
+library(readr)
+library(knitr)
+library(dplyr)
 
+types <- read_csv('../../data/processed/hall_type-count.csv')
+head(types, n=5) %>% 
+  kable(format = 'html', row.names = TRUE)
+
+```
 

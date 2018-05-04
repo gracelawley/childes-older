@@ -1,6 +1,11 @@
 ---
 output: github_document
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 # MacWhinney Corpus
 
 #### Number of transcripts:
@@ -18,16 +23,22 @@ output: github_document
 * Processed = 19,395
   
 #### Number of tokens & types:
-* Tokens = 104,170
-* Types = 4,431
-* Type-Token Ratio = `r 4431/104170`
+* Tokens = 105,353
+* Types = 4,325
+* Type-Token Ratio = `r 4325/105353`
 
 #### Top five most frequent tokens:
-1. i -- 4,847
-2. and -- 3,564
-3. the -- 3,260
-4. you -- 3,008
-5. yeah -- 2,219
+```{r echo = FALSE, message = FALSE}
+library(readr)
+library(knitr)
+library(dplyr)
+
+types <- read_csv('../../data/processed/macwhinney_type-count.csv')
+head(types, n=5) %>% 
+  kable(format = 'html', row.names = TRUE)
+
+```
+
 
 
 #### <span style="color:red">Note!</span>
