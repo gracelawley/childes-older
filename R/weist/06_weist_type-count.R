@@ -11,8 +11,10 @@ out_path = here("data/processed/weist_type-count.csv")
 ## -----------------------------------------------------------------
 
 # Importing data
+## Need to specific column type for age since read_csv uses only 
+## the first 1000 rows to predict column type
 tokens <- read_csv(in_path, col_types = 
-                     cols(age = col_double()))
+                     cols(age = col_double())) 
 
 # Some light reorganization
 types <- tokens %>% 
