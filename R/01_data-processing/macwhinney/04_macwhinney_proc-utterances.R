@@ -14,7 +14,7 @@ out_path = here("data/processed/macwhinney_proc-utterances.csv")
 
 
 # Loading text processing function
-source("R/functions.R")
+source("R/01_data-processing/functions.R")
 
 # Importing data
 filtered_utterances <- read_csv(in_path)
