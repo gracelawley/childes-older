@@ -1,0 +1,39 @@
+---
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Hall Corpus
+
+#### Number of transcripts:
+* Raw = 39
+* Filtered = 39
+
+#### Transcripts removed:  
+* Those where the child fell outside of the age range of 36-96 months
+
+#### Number of utterances:
+* Raw = 75,270
+* Filtered = 75,270
+* Processed = 74,310
+  
+#### Number of tokens & types:
+* Tokens = 321,581
+* Types = 10,529
+* Type-Token Ratio = `r 10529/321581`
+
+#### Top five most frequent tokens:
+```{r echo = FALSE, message = FALSE}
+library(readr)
+library(knitr)
+library(dplyr)
+
+types <- read_csv('../../data/processed/hall_type-count.csv')
+head(types, n=5) %>% 
+  kable(format = 'html', row.names = TRUE)
+
+```
+

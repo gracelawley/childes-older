@@ -1,0 +1,39 @@
+---
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Brown Corpus
+
+#### Number of transcripts:
+* Raw = 214
+* Filtered = 136
+
+#### Transcripts removed:  
+* Those where the child fell outside of the age range of 36-96 months
+
+#### Number of utterances:
+* Raw = 96,952
+* Filtered = 55,991
+* Processed = 55,050
+  
+#### Number of tokens & types:
+* Tokens = 216,801
+* Types = 4,769
+* Type-Token Ratio = `r 4769/216801`
+
+#### Top five most frequent tokens:
+```{r echo = FALSE, message = FALSE}
+library(readr)
+library(knitr)
+library(dplyr)
+
+types <- read_csv('../../data/processed/brown_type-count.csv')
+head(types, n=5) %>% 
+  kable(format = 'html', row.names = TRUE)
+
+```
+

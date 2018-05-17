@@ -1,0 +1,39 @@
+---
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Bloom 1970 Corpus
+
+#### Number of transcripts:
+* Raw = 28
+* Filtered = 1
+
+#### Transcripts removed:  
+* Those where the child fell outside of the age range of 36-96 months
+
+#### Number of utterances:
+* Raw = 32,793
+* Filtered = 2,160
+* Processed = 2,080
+  
+#### Number of tokens & types:
+* Tokens = 7,965
+* Types = 719
+* Type-Token Ratio = `r 719/7965`
+
+#### Top five most frequent tokens:
+```{r echo = FALSE, message = FALSE}
+library(readr)
+library(knitr)
+library(dplyr)
+
+types <- read_csv('../../data/processed/bloom1970_type-count.csv')
+head(types, n=5) %>% 
+  kable(format = 'html', row.names = TRUE)
+
+```
+

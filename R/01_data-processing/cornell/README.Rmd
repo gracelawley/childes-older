@@ -1,0 +1,41 @@
+---
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Cornell Corpus
+
+#### Number of transcripts:
+* Raw = 40
+* Filtered = 6
+
+#### Transcripts removed:  
+* Files from Haas, Horn, MOM, Moore, and Nurse sections (LSNO and Schacter sections included)
+* Those where the child fell outside of the age range of 36-96 months
+
+#### Number of utterances:
+* Raw = 3,014
+* Filtered = 752
+* Processed = 752
+  
+#### Number of tokens & types:
+* Tokens = 2,869
+* Types = 544
+* Type-Token Ratio = `r 544/2869`
+
+#### Top five most frequent tokens:
+```{r echo = FALSE, message = FALSE}
+library(readr)
+library(knitr)
+library(dplyr)
+
+types <- read_csv('../../data/processed/cornell_type-count.csv')
+head(types, n=5) %>% 
+  kable(format = 'html', row.names = TRUE)
+
+```
+
+

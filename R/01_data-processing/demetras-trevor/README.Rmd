@@ -1,0 +1,38 @@
+---
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Demetras-Trevor Corpus
+
+#### Number of transcripts:
+* Raw = 26
+* Filtered = 11
+
+#### Transcripts removed:  
+* Those where the child fell outside of the age range of 36-96 months
+
+#### Number of utterances:
+* Raw = 6,971
+* Filtered = 2,515
+* Processed = 2,459
+  
+#### Number of tokens & types:
+* Tokens = 10,425
+* Types = 1,026
+* Type-Token Ratio = `r 1026/10425`
+
+#### Top five most frequent tokens:
+```{r echo = FALSE, message = FALSE}
+library(readr)
+library(knitr)
+library(dplyr)
+
+types <- read_csv('../../data/processed/demetras-trevor_type-count.csv')
+head(types, n=5) %>% 
+  kable(format = 'html', row.names = TRUE)
+
+```
