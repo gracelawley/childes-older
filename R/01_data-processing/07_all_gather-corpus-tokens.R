@@ -7,7 +7,7 @@ in_path = here("data/processed/")
 ## -----------------------------------------------------------------
 
 ## Output path -----------------------------------------------------
-out_path = here("data/processed/all_tokens.csv")
+out_path = here("data/processed/all_corpus_tokens.csv")
 ## -----------------------------------------------------------------
 
 
