@@ -1,0 +1,78 @@
+---
+output: github_document
+---
+# The 14 Corpora Individually
+
+#### xxx/01_xxx_get-transcripts.R
+* Pulling down raw transcripts via the `childesr` package
+* *Output:* data/raw/xxx_transcripts.csv
+
+#### xxx/01_xxx_get-utterances.R
+* Pulling down raw utterances via the `childesr` package
+* *Output:* data/raw/xxx_utterances.csv
+
+#### xxx/02_xxx_filter-transcripts.R
+* Filtering raw transcripts against the project specific criteria  
+* *Input:* data/raw/xxx_transcripts.csv
+* *Output:* data/processed/xxx_filtered-transcripts.csv
+
+#### xxx/03_xxx_filter-utterances.R
+* Filtering out utterances that were in the transcripts that were removed in the previous script, 02_xxx_filter-transcripts.R
+* *Input:* 
+  + data/processed/xxx_filtered-transcripts.csv
+  + data/raw/xxx_utterances.csv
+* *Output:* data/processed/xxx_filtered-utterances.csv
+
+#### xxx/04_xxx_proc-utterances.R
+* Processing utterances with `process_text()` from process_text_fxn.R
+* The decrease in total number of utterances that occurs during this step is due to empty rows being removed
+* *Input:* data/processed/xxx_filtered-utterances.csv
+* *Output:* data/processed/xxx_proc-utterances.csv
+
+#### xxx/05_xxx_token-split.R
+* Splitting utterances into tokens
+* *Input:* data/processed/xxx_proc-utterances.csv
+* *Output:* data/processed/xxx_tokens.csv
+
+#### xxx/06_xxx_type-count.R
+* Grouping tokens into types and calculating frequency
+* *Input:* data/processed/xxx_tokens.csv
+* *Output:* data/processed/xxx_type-count.csv
+
+
+# All 14 Corpora Together
+
+#### 07_all_gather-corpus-tokens.R
+* Merging xxx_tokens.csv files for each of the 14 corpora together into one file   
+* *Input:* data/processed/xxx_tokens.csv  
+* *Output:* data/processed/all_corpus_tokens.csv  
+
+
+#### 08_all_gather-corpus-types.R
+* Grouping tokens from all_tokens.csv into types by corpus and calculating:
+  + `n_overall`: overall count per type, across all 14 corpora
+  + `n_corpus`: count per type by each of the 14 corpora individually
+* *Input:* data/processed/all_corpus_tokens.csv
+* *Output:* data/processed/all_corpus_types.csv
+
+#### 08_all_gather-overall-types.R
+* Group tokens from all_corpus_tokens.csv into types of the union of all 14 corpora and calculating:
+  + `n`: overall count per type, across all 14 corpora
+* *Input:* data/processed/all_corpus_tokens.csv
+* *Output:* data/processed/all_overall_types.csv
+  
+```{r echo = FALSE, message = FALSE}
+library(readr)
+
+all_tokens <- read_csv('../../data/processed/all_corpus_tokens.csv')
+
+n_tokens <- nrow(all_tokens)
+n_types <- length(unique(all_tokens$word))
+```
+
+#### Number of tokens & types overall:
+* Tokens = `r n_tokens`
+* Types = `r n_types`
+* Type-Token Ratio = `r n_types/n_tokens`
+
+

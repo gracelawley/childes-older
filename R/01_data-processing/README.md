@@ -49,23 +49,32 @@
 
 # All 14 Corpora Together
 
-#### 07\_all\_merge-tokens.R
+#### 07\_all\_gather-corpus-tokens.R
 
   - Merging xxx\_tokens.csv files for each of the 14 corpora together
     into one file  
   - *Input:* data/processed/xxx\_tokens.csv  
-  - *Output:* data/processed/all\_tokens.csv
+  - *Output:* data/processed/all\_corpus\_tokens.csv
 
-#### 08\_all\_type-count.R
+#### 08\_all\_gather-corpus-types.R
 
-  - Grouping tokens from all\_tokens.csv into types and calculating:
+  - Grouping tokens from all\_tokens.csv into types by corpus and
+    calculating:
       - `n_overall`: overall count per type, across all 14 corpora
       - `n_corpus`: count per type by each of the 14 corpora
         individually
-  - *Input:* data/processed/all\_tokens.csv
-  - *Output:* data/processed/all\_type-count.csv
+  - *Input:* data/processed/all\_corpus\_tokens.csv
+  - *Output:* data/processed/all\_corpus\_types.csv
 
-#### Number of tokens & types:
+#### 08\_all\_gather-overall-types.R
+
+  - Group tokens from all\_corpus\_tokens.csv into types of the union of
+    all 14 corpora and calculating:
+      - `n`: overall count per type, across all 14 corpora
+  - *Input:* data/processed/all\_corpus\_tokens.csv
+  - *Output:* data/processed/all\_overall\_types.csv
+
+#### Number of tokens & types overall:
 
   - Tokens = 1091939
   - Types = 16982
