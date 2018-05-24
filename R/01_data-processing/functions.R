@@ -1,9 +1,13 @@
-## A function for manual cleaning of raw utterance text ##
-
-# requires stringr package
-
-
 process_text <- function(text){
+  # A function for manual cleaning of raw utterance text
+  # 
+  # Requires stringr and dplyr packages
+  #
+  # Args: 
+  #   text: the string to be processed/cleaned
+  # Returns:
+  #   The processed string
+  #
   require(stringr)
   require(dplyr)
   
