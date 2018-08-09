@@ -1,0 +1,89 @@
+---
+title: 'CHILDES: Standardizing Phrases with "_"'
+author: "Grace Lawley"
+date: "8/3/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("00_setup.R")
+```
+
+Loading filtered utterances, raw utterances, and processed cmu-dict
+```{r loading_data}
+fil_in_path <- here("data/processed/childes/all_filtered-utterances.csv")
+cmu_in_path <- here("data/processed/ref-corpora/cmu-dict-0.7b_proc.csv")
+erpa_in_path <- here("data/processed/erpa_tokens.csv")
+erpa_in_path_2 <- here("data/processed/erpa_unsplit.csv")
+
+fil_utts <- read_csv(fil_in_path) # filtered utterances
+#cmu <- read_csv(cmu_in_path) # processed cmu-dict
+#erpa <- read_csv(erpa_in_path)
+#erpa_raw <- read_csv(erpa_in_path_2) %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% 
+```
+
+Removing unneeded columns from `utts` with corpora metadata and only keeping the `utterance` column. Then tokenizing the utterances with tokens being split on **white space**
+```{r}
+tokens <- fil_utts %>% 
+  select(utterance) %>% 
+  unnest_tokens(output = word, input = utterance, token = "regex", 
+                pattern = "[:space:]", to_lower = FALSE) 
+```
+
+
+```{r}
+phrase_norm <- function(phrase) {
+  if (str_detect(phrase, "_")) {
+    if (str_detect(phrase, "[:upper:]")) {
+      return ("_propn_")
+    } else if (str_detect(phrase, "^([:lower:]{1}_)+[:lower:]{1}s?$")) {
+        phrase <- str_replace_all(phrase, "_", "")
+        return (phrase)
+    } else {
+        phrase <- str_replace_all(phrase, "_", " ")
+        return(phrase)
+    }
+  } else {
+    return (phrase)
+  }
+}
+```
+
+
+
+
+```{r}
+underscores <- tokens %>% 
+  mutate(replacement = map_chr(word, phrase_norm))
+```
+
+```{r}
+types_w_plus <- tokens %>%
+  filter(str_detect(word, "\\+")) %>% 
+  distinct()
+```
+
+
+
+
+
+```{r}
+testing <- types_w_us %>% 
+  mutate(word = map_chr(word, phrase_norm))
+
+foo <- tokens %>% 
+  mutate(replacement = map_chr(word, phrase_norm)) %>% 
+  distinct()
+
+foo <- foo %>% 
+  mutate(change = word == replacement )
+
+foo %>% count(change)
+
+hmm <- foo %>% 
+  filter(!change)
+```
+
+
+

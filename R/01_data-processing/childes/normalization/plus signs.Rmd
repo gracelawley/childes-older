@@ -1,0 +1,65 @@
+---
+title: 'CHILDES: Standarizing Phrases with "+"'
+author: "Grace Lawley"
+date: "7/24/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("00_setup.R")
+```
+
+Loading filtered utterances, raw utterances, and processed cmu-dict
+```{r loading_data}
+fil_in_path <- here("data/processed/childes/all_filtered-utterances.csv")
+cmu_in_path <- here("data/processed/ref-corpora/cmu-dict-0.7b_proc.csv")
+
+fil_utts <- read_csv(fil_in_path) # filtered utterances
+cmu <- read_csv(cmu_in_path) # processed cmu-dict
+```
+
+
+Removing unneeded columns from `utts` with corpora metadata and only keeping the `utterance` column. Then tokenizing the utterances with tokens being split on **white space**
+
+```{r}
+tokens <- fil_utts %>% 
+  select(utterance) %>% 
+  unnest_tokens(output = word, input = utterance, token = "regex", 
+                pattern = "[:space:]", to_lower = FALSE) 
+```
+
+
+# 1. Plus Signs
+```{r}
+plus_norm <- function(phrase, dict) {
+  # dict must be a character vector
+  if (str_detect(phrase, "\\+")) {
+    str_collapsed <- str_replace_all(phrase, "\\+", "")
+    str_connected <- str_replace_all(phrase, "\\+", "_")
+     
+    if (str_connected %in% dict) {
+      return (str_connected)
+      
+    } else if (str_collapsed %in% dict) {
+        return (str_collapsed)
+      
+    } else {
+        return (str_connected)
+    }
+    
+  } else {
+      return (phrase)
+  }
+} 
+```
+
+
+
+```{r}
+tokens <- tokens %>% 
+  mutate(replacement = map_chr(word, plus_norm, cmu$entry))
+```
+
+
+
