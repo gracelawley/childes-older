@@ -70,6 +70,9 @@ write_csv(all_fil_utterances, all_out_path)
 
 
 
+# Clean up ====================================================================
 
-# Cleaning up global environment while keeping output of 00_setup.R
-rm(list=setdiff(ls(), "corpora"))
+# Clearing all of global environment except `corpora` 
+rm(list=setdiff(ls(), "corpora"))  
+
+# =============================================================================

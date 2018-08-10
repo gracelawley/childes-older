@@ -75,7 +75,7 @@ norm_stats <- tokens_normed %>%
   # reorganize
   distinct(corpus, .keep_all = TRUE) %>% 
   select(-child, -word)
-
+%>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% 
 
 stats <- fil_stats %>% 
   left_join(norm_stats, by = "corpus")

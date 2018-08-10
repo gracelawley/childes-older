@@ -1,7 +1,6 @@
 # Script to pull down utterances from CHILDES database via the `childesr`
-# package. Writes csv files for each corpus individually & also a csv file for 
-# all corpora together.
-
+# package. Writes csv files for each corpus individually & also writes a
+# csv file with all of the corpora together
 
 # File paths ==================================================================
 indiv_out_path <- tolower(corpora$corpus) %>% 
@@ -42,5 +41,10 @@ write_csv(all_utterances, all_out_path)
 
 
 
-# Cleaning up global environment while keeping output of 00_setup.R
-rm(list=setdiff(ls(), "corpora"))
+
+# Clean up ====================================================================
+
+# Clearing all of global environment except `corpora` 
+rm(list=setdiff(ls(), "corpora"))  
+
+# =============================================================================

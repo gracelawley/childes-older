@@ -48,11 +48,14 @@ map2(fil_transcripts, indiv_out_path, write_csv)
 write_csv(all_fil_transcripts, all_out_path)
 
 
-# Cleaning up global environment while keeping output of 00_setup.R
-rm(list=setdiff(ls(), "corpora")) 
 
-  
-  
+
+# Clean up ====================================================================
+
+# Clearing all of global environment except `corpora` 
+rm(list=setdiff(ls(), "corpora"))  
+
+# =============================================================================
   
   
   

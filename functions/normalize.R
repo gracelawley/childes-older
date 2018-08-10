@@ -20,6 +20,9 @@ plus_norm <- function(phrase, dict) {
   }
 } 
 
+
+
+
 # Function for normalizing phrases with _ signs
 phrase_norm <- function(phrase) {
   if (str_detect(phrase, "_")) {
@@ -36,6 +39,9 @@ phrase_norm <- function(phrase) {
     return (phrase)
   }
 }
+
+
+
 
 # Function for normalizing capitalized words
 capitals_norm <- function(word, exceptions = c("I'm", "I'll", "I've", 
@@ -58,6 +64,9 @@ capitals_norm <- function(word, exceptions = c("I'm", "I'll", "I've",
     return (word)
   }
 }
+
+
+
 
 # Function to expand exception contraction cases specific to CHILDES data
 contracts_exceptions_expand <- function(string) {
@@ -122,7 +131,7 @@ contracts_general_expand <- function(string) {
 }
 
 # Drop coded words
-code_wds_drop <- function(string) {
+code_wds_norm <- function(string) {
   string <- string %>% 
     str_replace_all("\\b[:alpha:]*xxx[:alpha:]*\\b", "_na_") %>% 
     str_replace_all("\\byyy\\b", "_na_")

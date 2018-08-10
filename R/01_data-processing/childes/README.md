@@ -1,60 +1,83 @@
 
-# The 14 Corpora Individually
+# Processing Scripts
 
-#### xxx/01\_xxx\_get-transcripts.R
 
-  - Pulling down raw transcripts via the `childesr` package
-  - *Output:* data/raw/xxx\_transcripts.csv
+#### `00_load-packages.R`
+- Loading all packages to be used
 
-#### xxx/01\_xxx\_get-utterances.R
 
-  - Pulling down raw utterances via the `childesr` package
-  - *Output:* data/raw/xxx\_utterances.csv
+#### `00_pick-corpora.R`
+- Defining which corpora will be used 
 
-#### xxx/02\_xxx\_filter-transcripts.R
 
-  - Filtering raw transcripts against the project specific criteria  
-  - *Input:* data/raw/xxx\_transcripts.csv
-  - *Output:* data/processed/xxx\_filtered-transcripts.csv
+#### `01_get-transcripts.R`
+- Pulling down raw transcripts via the `childesr` package
+- **Output:**
+    + `data/raw/childes/xxx_transcripts.csv`
+    + `data/raw/childes/all_transcripts.csv`
+    
 
-#### xxx/03\_xxx\_filter-utterances.R
+#### `01_get-utterances.R`
+- Pulling down raw utterances via the `childesr` package
+- **Output:**
+    + `data/raw/childes/xxx_utterances.csv`
+    + `data/raw/childes/all_utterances.csv`
 
-  - Filtering out utterances that were in the transcripts that were
-    removed in the previous script, 02\_xxx\_filter-transcripts.R
-  - *Input:*
-      - data/processed/xxx\_filtered-transcripts.csv
-      - data/raw/xxx\_utterances.csv
-  - *Output:* data/processed/xxx\_filtered-utterances.csv
 
-#### xxx/04\_xxx\_proc-utterances.R
+#### `02_filter-transcripts_exceptions.R`
+- Filtering raw transcripts against the my project inclusion/exclusion criteria **(insert link to documentation)** for the *exception* cases
+- **Add details about exception cases**
+- **Input:**
+    + `data/raw/childes/xxx_transcripts.csv`
+    
 
-  - Processing utterances with `process_text()` from
-    process\_text\_fxn.R
-  - The decrease in total number of utterances that occurs during this
-    step is due to empty rows being removed
-  - *Input:* data/processed/xxx\_filtered-utterances.csv
-  - *Output:* data/processed/xxx\_proc-utterances.csv
+#### `03_filter-transcripts_typical.R`
+- Filtering raw transcripts against the my project inclusion/exclusion criteria **(insert link to documentation)** for the *typical* cases
+- A continuation of `02_filter-transcripts_exceptions.R`
+- **Output:**
+    + `data/processed/childes/xxx_filtered-transcripts.csv`
+    + `data/processed/childes/all_filtered-transcripts.csv`
+    
+    
+#### `04_filter-utterances.R`
+- Filtering out utterances that are in the transcripts that were just filtered out in `03_filter-transcripts_exceptions.R` and `04_filter-transcripts_typical.R`
+- **Input:**
+    + `data/processed/childes/xxx_filtered-transcripts.csv`
+    + `data/raw/childes/xxx_utterances.csv`
+- **Output:**
+    + `data/processed/childes/xxx_filtered-utterances.csv`
+    + `data/processed/childes/all_filtered-utterances.csv`
 
-#### xxx/05\_xxx\_token-split.R
 
-  - Splitting utterances into tokens
-  - *Input:* data/processed/xxx\_proc-utterances.csv
-  - *Output:* data/processed/xxx\_tokens.csv
+#### `05_tokenize-pre-norm.R`
+- Splitting utterances into tokens and creating list of types and global type count
+- **Input:**
+    + `data/processed/childes/all_filtered-utterances.csv`
+- **Output:**
+    + `data/processed/childes/all_tokens_pre-norm.csv`
+    + `data/processed/childes/all_types_pre-norm.csv`
 
-#### xxx/06\_xxx\_type-count.R
 
-  - Grouping tokens into types and calculating frequency
-  - *Input:* data/processed/xxx\_tokens.csv
-  - *Output:* data/processed/xxx\_type-count.csv
+#### `06_normalize-types.R`
+- Normalizing types and saving a dataframe of word mappings
+- **add details about normalization**
+- **Input:**
+    + `data/processed/childes/all_types_pre-norm.csv`
+    + `data/processed/ref-corpora/cmu-dict-0.7b_proc.csv`
+    + `functions/normalize.R`
+- **Output:**
+    + `data/processed/childes/all_types_norm_mappings.csv`
 
-# All 14 Corpora Together
 
-#### 07\_all\_gather-corpus-tokens.R
+#### `07_normalize-tokens.R`
+- Normalize tokens based on word mappings from `06_normalize-types.R` and re-tokenize any phrases and have been split
+- **Input:**
+    + `data/processed/childes/all_types_norm_mappings.csv`
+    + `data/processed/childes/all_tokens_pre-norm.csv`
+- **Output:**
+    + `data/processed/childes/all_tokens_post-norm.csv`
 
-  - Merging xxx\_tokens.csv files for each of the 14 corpora together
-    into one file  
-  - *Input:* data/processed/xxx\_tokens.csv  
-  - *Output:* data/processed/all\_corpus\_tokens.csv
+
 
 #### 08\_all\_gather-corpus-types.R
 

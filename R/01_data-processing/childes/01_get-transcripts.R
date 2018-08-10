@@ -1,6 +1,6 @@
 # Script to pull down transcript information from CHILDES database via the
-# `childesr` package. Writes csv files for each corpus individually & also a 
-# csv file for all corpora together.
+# `childesr` package. Writes csv files for each corpus individually & also 
+# writes a csv file with all of the corpora together
 
 
 # File paths ==================================================================
@@ -31,12 +31,16 @@ map2(transcripts, indiv_out_path, write_csv)
 
 # Writing output file for all corpora together
 write_csv(all_transcripts, all_out_path)
-%>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% %>% 
 
-# Clearing all of global environment except `corpora`
+
+
+
+# Clean up ====================================================================
+
+# Clearing all of global environment except `corpora` 
 rm(list=setdiff(ls(), "corpora"))  
 
-
+# =============================================================================
 
   
 
