@@ -1,28 +1,20 @@
 # childes
 
-Database version used as of 4/30/18 is '2018.1'
+Database version used as of 8/10/18 is '2018.1'
 
-*Level 0*  
-1. Braunwald  
-2. Davis  
-3. Hall  
-4. Kuczaj  
-5. Providence  
-6. Warren-Leubecker  
+1. `Bloom70`
+2. `Braunwald`
+3. `Brown`
+4. `Clark`
+5. `Cornell`
+6. `Demetras1`
+7. `EllisWeismer`
+8. `Hall`
+9. `Kuczaj`
+10. `MacWhinney`
+11. `Sachs`
+12. `Suppes`
+13. `Warren`
+14. `Weist`
 
-*Level 1*  
-1. Brown  
-2. MacWhinney  
 
-*Level 2*  
-1. Clark  
-2. Demetras-Trevor  
-3. Weist  
-
-*Level 3*  
-1. Bloom 1970  
-2. Cornell  
-3. EllisWeismer  
-4. Garvey  
-5. Sachs  
-6. Suppes  
