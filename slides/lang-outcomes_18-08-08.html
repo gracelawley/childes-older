@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Text Normalization of 14 CHILDES Corpora</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Grace Lawley" />
+    <link href="lang-outcomes_18-08-08_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="lang-outcomes_18-08-08_files/remark-css-0.0.1/rladies-fonts.css" rel="stylesheet" />
+    <script src="lang-outcomes_18-08-08_files/kePrint-0.0.1/kePrint.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Text Normalization of 14 CHILDES Corpora
+## Language Outcomes Meeting
+### Grace Lawley
+### August 8th, 2018
+
+---
+
+
+
+
+# CHILDES Database
+- Child Language Data Exchange System (CHILDES)
+
+--
+
+    - Online repository of language acquisition data
+
+--
+
+- CHILDES → Eng-NA 
+
+--
+
+    + Collection of English North American corpora
+
+    + **54** corpora
+
+---
+### The Routledge Handbook of Corpus Linguistics
+*O'Keeffe, Anne, and Michael McCarthy. Routledge, 2010.*
+
+&lt;img src="images/routledge.jpg" width="25%" style="display: block; margin: auto;" /&gt;
+
+--
+
+&gt; "...Bringing together experts in the key areas of development and change, the handbook is structured around six themes which take the reader through building and designing a corpus to using a corpus to study literature and translation..."
+
+
+https://www.routledge.com/The-Routledge-Handbook-of-Corpus-Linguistics/OKeeffe-McCarthy/p/book/9780415464895
+---
+
+# Inclusion/Exclusion Criteria
+### General
+--
+
+- Part of the Eng-NA section of CHILDES
+
+- Sufficient information about the details of the study and corpus is available
+
+--
+
+### Participants
+
+--
+ 
+- 36 - 96 months old
+
+--
+
+- English as first and primary language
+
+--
+
+- No reported gross sensory impairments (e.g. hearing impairment), congenital defects, developmental disabilities, or atypical development
+
+--
+
+- No siginificant/regular exposure to another language
+
+--
+
+    + i.e. 75% or higher consistent exposure to a language other than English
+
+---
+### Language Samples
+
+--
+
+- Naturalistic and unscripted elicitations (in either naturalistic or laboratory settings)
+
+
+--
+
+- Intelligible speech
+
+--
+
+- One-on-one conversations (e.g. child-examiner conversations or parent-child conversations)
+
+--
+
+    + Can be child-child conversations as long as both children meet the participant requirements
+
+    + No conversations amongst a group of children
+
+---
+### Language Samples continued
+- No reading from books, etc.
+
+--
+
+- No restricted vocabulary that is caused by the structure of the study or the experiment design
+
+--
+
+    + e.g. no samples of free play sesssions for multiple participants that each involve the same set of experimenter-provided toys
+    
+--
+
+- No structured speech
+
+--
+
+    + e.g. speech from an interview that has been tailored for a specific experimental interest(s)
+
+---
+## Summary Table - *Word Doc*
+
+![](images/childes_word.png)
+
+
+---
+## Summary Table - *Airtable*
+
+![](images/childes_airtable.png)
+
+(*in progress*)
+
+---
+## Decision Table - *Airtable*
+
+![](images/decisions_airtable.png)
+
+---
+class: inverse, center, middle
+# . . .
+
+---
+
+## 54 Corpora → 14 Corpora
+
+.pull-left[
+- `Bloom70`
+- `Braunwald`
+- `Brown`
+- `Clark`
+- `Cornell`
+- `Demetras1`
+- `EllisWeismer`]
+
+.pull-right[
+- `Hall`
+- `Kuczaj`
+- `MacWhinney`
+- `Sachs`
+- `Suppes`
+- `Warren`
+- `Weist`]
+
+
+---
+class: inverse, center, middle
+
+# Cleaning, processing, &amp; normalizing
+
+---
+## Filtering data
+
+- Filtered transcripts &amp; utterances against the inclusion/exclusion criteria as applicable
+
+--
+
+    + 36-96 months
+    
+    + No reading from books, etc.
+    
+    + No restricted vocabulary
+    
+---
+class: center
+### Transcripts per corpora after filtering
+
+&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; corpus &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; n_trns &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Bloom70 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Cornell &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Clark &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Demetras1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Warren &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Sachs &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Suppes &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Hall &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 39 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Braunwald &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 72 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; EllisWeismer &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 89 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Weist &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 99 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; MacWhinney &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 120 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Brown &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 136 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Kuczaj &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 150 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+class: center
+### Type-token ratio per corpus after filtering and BEFORE normalization
+&lt;img src="lang-outcomes_18-08-08_files/figure-html/unnamed-chunk-3-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+---
+## The transcripts are extremely messy...
+
+--
+
+.pull-left[
+ ### 1. Plus signs
+
+```
+## # A tibble: 6 x 2
+##   word               n
+##   &lt;chr&gt;          &lt;int&gt;
+## 1 bath+room        142
+## 2 ice+cream         81
+## 3 choo+choo         55
+## 4 merry+go+round    47
+## 5 peanut+butter     47
+## 6 play+dough        41
+```
+]
+
+--
+
+.pull-right[
+### 2. Underscores
+
+```
+## # A tibble: 6 x 2
+##   word          n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 have_to    1802
+## 2 out_of      499
+## 3 a_lot_of    274
+## 4 thank_you   205
+## 5 lots_of     204
+## 6 has_to      184
+```
+]
+
+---
+.pull-left[
+### 3. Capitalized words with underscores
+
+```
+## # A tibble: 6 x 2
+##   word                 n
+##   &lt;chr&gt;            &lt;int&gt;
+## 1 Santa_Claus         82
+## 2 Ann_Marie           58
+## 3 Hong_kong_phooey    42
+## 4 Spider_man          36
+## 5 Darth_Vader         34
+## 6 I_mean              27
+```
+]
+
+--
+
+.pull-right[
+### 4. Capitalized words without underscores
+
+```
+## # A tibble: 6 x 2
+##   word      n
+##   &lt;chr&gt; &lt;int&gt;
+## 1 I     46263
+## 2 I'm    7487
+## 3 Mommy  3572
+## 4 I'll   2056
+## 5 Daddy  1524
+## 6 Carl    921
+```
+]
+
+---
+class: inverse, center, middle
+# Normalization
+
+---
+# 1. Normalizing plus signs
+
+Considered three possible mappings:   
+
+--
+
+### Case 1: Connect
+
+* e.g. *merry+go+round* → *merry_go_round*
+
+--
+
+### Case 2: Collapse
+
+* e.g. *bath+room* → *bathroom*
+
+--
+
+### Case 3: Separate
+
+* e.g. *orange+juice* → *orange juice*
+    
+---
+# 1. Normalizing plus signs
+
+### Used the CMU Pronouncing Dictionary as the standard to compare to
+
+--
+
+&gt; *"The Carnegie Mellon University Pronouncing Dictionary is an open-source machine-readable pronunciation dictionary for North American English that contains over 134,000 words and their pronunciations."*"
+
+http://www.speech.cs.cmu.edu/cgi-bin/cmudict
+
+---
+# 1. Normalizing plus signs
+
+### Mapping
+
+* Check if *connected* version exists in the CMU dictionary. 
+
+--
+
+    + If it exists, then map the word to the *connected* version
+    + e.g. *merry_go_round*
+    
+--
+    
+* If not, check if *collapsed* version exists in the CMU dictionary
+
+--
+
+    + If it exists, then map the word to the *collapsed* version
+    + e.g. *bathroom*
+
+--
+
+* If not, map to the *separated version*
+    + e.g. *orange juice*
+
+---
+# 2. &amp; 3. Normalizing underscores +/- capitalized words
+
+* If phrase contains at least 1 capitalized word...
+
+--
+
+    + ...map to **"_prop_np_"**
+    
+    + e.g. *New_York*, *Humpty_Dumpty*, *Miss_Swww*
+  
+--
+
+* If phrase is an acronym or initialism...
+
+--
+
+    + ...map to the colllapsed version
+    
+    + e.g. *c_d* → *cd*, *d_v_d* → *dvd*, *t_v* → *tv*
+
+--
+
+* Otherwise...map to the separated version
+
+--
+
+    + e.g. *has_to* → *has to*, *a_lot_of* → *a lot of*, *thank_you* → *thank you*, *okey_dokey* → *okey dokey*
+    
+---
+# 4. Capitalized words w/out underscores
+
+--
+
+* Exceptions: I'm, I'll, I've, I'd, I'mma
+
+    + Change to lowercase
+
+--
+
+* If only one letter...
+    
+    + Change to lowercase
+    
+    + e.g. I, "M and M's", "A B C..."
+    
+--
+
+* Otherwise...
+
+    + Change to **"_prop_n_"**
+    
+---
+
+# 5. Contractions
+    
+* For unambiguous cases, 
+
+--
+    + Map to expanded version
+
+    + e.g. *don't* → *do not*, *I'm* → *i am*
+
+--
+
+* For ambiguous cases
+
+--
+
+    + Remove apostrophe and collapse into one word
+
+    + e.g. *it's* → *its*, *we'd* → *wed*
+ 
+---
+
+# Type-token ratio per corpus
+&lt;img src="lang-outcomes_18-08-08_files/figure-html/unnamed-chunk-8-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Type-token ratio per corpus
+&lt;img src="lang-outcomes_18-08-08_files/figure-html/unnamed-chunk-9-1.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+---
+class: center
+## Types changed = 5,104
+
+--
+
+.pull-left[
+### Total Tokens:
+#### 1,031,357 → 1,068,978
+
+### Total Types:
+#### 19,508 → 14,719
+]
+
+--
+
+.pull-right[
+### Total _prop_np_ tokens
+#### 1,790
+
+
+### Total _prop_n_ tokens 
+#### 28,141
+]
+
+---
+# Next Steps
+
+#### dat, dis, dese, dere, dey  
+
+--
+
+#### eledator, wif, wabbit, wegular
+
+--
+
+#### lellow (yellow), thith (this?), weg (leg?), berember (remember?)  
+
+--
+
+#### sientate, beso
+
+--
+
+#### afraidiecats, afraidiedog
+
+--
+
+#### wiggleworm
+
+--
+
+#### supercalifragilisticexpialidocious
+
+---
+# Next Steps
+
+#### ahnnuhthuh, aenfuhnee, ahlovuhhuhfezs
+
+--
+
+#### ahpuhbuhbuhbuhbuh
+
+--
+
+#### boinkbawinkbockabanikae
+
+--
+
+### babobohmhmhmdoodoodoodootdoodoodoodo
+
+--
+
+## amuchaagelaamedaleguelalalalalalalaigueleleduhduh
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "atelier-lakeside-light",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

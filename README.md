@@ -1,6 +1,6 @@
 # childes
 
-Database version used as of 8/10/18 is '2018.1'
+Database version used as of 10/18/18 is '2018.1'
 
 1. `Bloom70`
 2. `Braunwald`

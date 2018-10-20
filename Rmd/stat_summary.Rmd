@@ -1,0 +1,169 @@
+---
+title: "General Stat Summary"
+author: "Grace Lawley"
+date: "10/10/2018"
+output: 
+  html_document:
+    theme: "cosmo"
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen = 999)
+
+library(here)
+library(tidyverse)
+library(knitr)
+```
+
+
+# Reading in files
+```{r load_data, message = FALSE, warning = FALSE}
+cmu_dict <- read_csv(here("data", "processed", "proc_cmu-dict.csv"))
+
+raw_transcripts <- read_csv(here("data", "raw", "transcripts_v2018.1.csv"))
+fil_transcripts <- read_csv(here("data", "processed", "filtered_transcripts.csv"))
+
+unnormed_tokens <- read_csv(here("data", "processed", "pre-norm_tokens.csv"))
+normed_tokens <- read_csv(here("data", "processed", "post-norm_tokens.csv"))
+```
+
+# Transcript Counts by child - raw & filtered
+
+## Calculating counts:
+```{r}
+n_raw_transcripts <- raw_transcripts %>% 
+  count(corpus_name, target_child_name) %>% 
+  rename(n_raw_transcripts = n)
+
+n_fil_transcripts <- fil_transcripts %>% 
+  count(corpus_name, target_child_name) %>% 
+  rename(n_fil_transcripts = n)
+```
+
+## Compiling final dataframe: `child_transcripts_n`
+```{r}
+# Joining raw and filtered counts 
+counts_transcripts <- n_raw_transcripts %>% 
+  left_join(n_fil_transcripts, by = c("corpus_name", "target_child_name")) %>% 
+  replace_na(list(n_raw_transcripts = 0, n_fil_transcripts = 0)) %>% 
+  mutate(prop_transcripts_retained = n_fil_transcripts/n_raw_transcripts) %>% 
+  
+  # Adding in count of children per corpus
+  add_count(corpus_name) %>% 
+  rename(n_children = n) %>% 
+  select(corpus_name, n_children, everything())
+```
+
+## Summary table:
+```{r}
+counts_transcripts %>% 
+  group_by(corpus_name) %>% 
+  summarize(n_children = n(),
+            total_raw_transcripts = sum(n_raw_transcripts),
+            total_fil_transcripts = sum(n_fil_transcripts),
+            prop_kept = total_fil_transcripts/total_raw_transcripts) %>% 
+  kable()
+```
+
+
+# Token and Type Counts by child
+
+## Calculating unnormed counts and type-token ratio
+```{r}
+n_unnormed_tokens <- unnormed_tokens %>% 
+  count(corpus_name, target_child_name) %>% 
+  rename(n_unnormed_tokens = n)
+
+n_unnormed_types <- unnormed_tokens %>% 
+  group_by(corpus_name, target_child_name) %>% 
+  mutate(n_unnormed_types = n_distinct(token)) %>% 
+  ungroup() %>% 
+  distinct(corpus_name, target_child_name, n_unnormed_types)
+
+
+n_unnormed_ttr <- n_unnormed_types %>% 
+  left_join(n_unnormed_tokens, by = c("corpus_name", "target_child_name")) %>% 
+  replace_na(list(n_unnormed_types = 0, n_unnormed_tokens = 0)) %>% 
+  mutate(unnormed_ttr = n_unnormed_types/n_unnormed_tokens)
+```
+
+
+## Calculating normed counts and type-token ratio:
+```{r}
+n_normed_tokens <- normed_tokens %>% 
+  count(corpus_name, target_child_name) %>% 
+  rename(n_normed_tokens = n)
+
+n_normed_types <- normed_tokens %>% 
+  group_by(corpus_name, target_child_name) %>% 
+  mutate(n_normed_types = n_distinct(token)) %>% 
+  ungroup() %>% 
+  distinct(corpus_name, target_child_name, n_normed_types)
+
+n_normed_ttr <- n_normed_types %>% 
+  left_join(n_normed_tokens, by = c("corpus_name", "target_child_name")) %>% 
+  replace_na(list(n_normed_types = 0, n_normed_tokens = 0)) %>% 
+  mutate(normed_ttr = n_normed_types/n_normed_tokens)
+```
+
+## Compiling final data frame: `counts_tokens_types`
+```{r}
+counts_tokens_types <- n_unnormed_ttr %>% 
+  left_join(n_normed_ttr, by = c("corpus_name", "target_child_name")) %>% 
+  select(corpus_name, target_child_name, n_unnormed_types, n_normed_types,
+         n_unnormed_tokens, n_normed_tokens, unnormed_ttr, normed_ttr) %>% 
+  mutate(ttr_change = normed_ttr - unnormed_ttr) %>% 
+  
+  # Adding count of children per corpus
+  add_count(corpus_name) %>% 
+  rename(n_children = n) %>% 
+  select(corpus_name, n_children, everything())
+
+
+# Adding in an id linking corpus and child together
+counts_tokens_types <- counts_tokens_types %>% 
+  group_by(corpus_name) %>% 
+  mutate(id = str_c(corpus_name, "_", row_number())) %>% 
+  ungroup() %>% 
+  select(id, everything())
+```
+
+Final data frames: `child_transcripts_n`, `child_ttr`
+
+# Visualizations
+
+```{r}
+ggplot(counts_tokens_types, aes(corpus_name)) +
+  geom_bar() +
+  theme_minimal() + 
+  theme(axis.text.x = element_text(angle = 45)) +
+  labs(x = "Corpus", y = "# of Children", 
+       title = "Number of Children per Corpus")
+```
+
+```{r}
+ggplot(counts_tokens_types, aes(n_normed_types, n_normed_tokens, 
+                                group = target_child_name, 
+                                color = corpus_name,
+                                label = corpus_name)) +
+  geom_text(nudge_x = 1, nudge_y = 1, alpha = 0.5) +
+  theme_minimal() +
+  labs(x = "# Types (Normalized)", y = "# Tokens (Normalized",
+       title = "Type-Token Ratio (Normalized) by Child")
+```
+
+```{r}
+ggplot(counts_tokens_types, aes(id, unnormed_ttr, fill = corpus_name)) +
+  geom_col(show.legend = TRUE, alpha = 0.3) +
+  theme_minimal() +
+  theme(axis.text.x = element_blank(),
+        axis.title.x = element_blank()) +
+  geom_col(aes(id, normed_ttr, fill = corpus_name), show.legend = FALSE, alpha = 0.6) +
+  labs(x = "Child", y = "Type-Token-Ratio", 
+       title = "Type-Token Ratio by Child",
+       subtitle = "Before and After Normalization")
+```

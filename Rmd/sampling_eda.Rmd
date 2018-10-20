@@ -1,0 +1,107 @@
+---
+title: "Sampling EDA"
+author: "Grace Lawley"
+date: "10/10/2018"
+output: 
+  html_document:
+    theme: "cosmo"
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+options(scipen = 999)
+
+library(here)
+library(tidyverse)
+library(skimr)
+library(kableExtra)
+library(knitr)
+```
+
+# Load in the normalized tokens csv file
+```{r}
+normed_tokens <- read_csv(here("data", "processed", "post-norm_tokens.csv"))
+```
+
+# Deciding which _n_ to use for the samples:
+
+Creating new dataframe with the token counts per corpus/child and adding a unique identifier for each corpus/child
+```{r}
+token_count <- normed_tokens %>% 
+  count(corpus_name, target_child_name) %>% 
+  rename(n_tokens = n) %>% 
+
+  # adding unique id for each corpus/child
+  group_by(corpus_name) %>%
+  mutate(id = str_c(corpus_name, "_", row_number())) %>%
+  ungroup() %>%
+  select(id, everything())
+```
+
+Token Count, _Descending_
+```{r}
+token_count %>% 
+  arrange(n_tokens) %>% 
+  kable("html", caption = "Descending Token Count by Corpus/Child") %>% 
+  kable_styling() %>% 
+  scroll_box(width = "100%", height = "200px")
+```
+
+Token Count, _Ascending_
+```{r}
+token_count %>% 
+  arrange(desc(n_tokens)) %>% 
+  kable("html", caption = "Descending Token Count by Corpus/Child") %>% 
+  kable_styling() %>% 
+  scroll_box(width = "100%", height = "200px")
+```
+
+Output of `skimr::skim()`, a function for general summary statistics of a dataframe
+```{r}
+skim(token_count)
+```
+
+More general summary statistics of the token counts per corpus/child:
+```{r}
+token_count %>% 
+  summarize(min = min(n_tokens),
+            max = max(n_tokens),
+            mean = mean(n_tokens),
+            median = median(n_tokens),
+            sd = sd(n_tokens),
+            iqr = IQR(n_tokens)) %>% 
+  kable(caption = "Summary Statistics for token count per corpus/child")
+```
+
+General summary statistics of the token counts per corpus/child with the Cornell corpus removed:
+```{r}
+token_count %>% 
+  filter(corpus_name != "Cornell") %>% 
+  summarize(min = min(n_tokens),
+            max = max(n_tokens),
+            mean = mean(n_tokens),
+            median = median(n_tokens),
+            sd = sd(n_tokens),
+            iqr = IQR(n_tokens)) %>% 
+  kable(caption = "Summary Statistics for token count per corpus/child")
+```
+
+Visualization of token count per corpus/child
+```{r}
+token_count %>%
+  mutate(id = as.factor(id),
+         id = fct_reorder(id, n_tokens)) %>% 
+  ggplot(aes(id, n_tokens,
+             fill = corpus_name)) +
+        geom_col() +
+        theme_minimal() +
+        theme(axis.text.x = element_blank()) +
+        labs(x = "Child", y = "# Tokens",
+             title = "Token Count per Corpus/Child")
+
+```
+

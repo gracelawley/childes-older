@@ -1,0 +1,269 @@
+---
+title: "Non-Metric Multidimensional Scaling on Normalized Tokens & Types"
+author: "Grace Lawley"
+date: "8/20/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, dpi = 300, fig.height = 10, fig.width = 10, message = FALSE)
+
+library(MASS)
+library(tidyverse)
+library(glue)
+library(here)
+library(ggrepel)
+library(corrplot)
+```
+
+
+
+```{r}
+mappings_in_path <- here("data/processed/childes/all_types_norm_mappings.csv")
+tokens_in_path <- here("data/processed/childes/all_tokens_post-norm.csv")
+
+
+mappings <- read_csv(mappings_in_path)
+tokens_raw <- read_csv(tokens_in_path)
+
+```
+
+# Grouping by corpus AND child
+
+```{r}
+by_kid1 <- tokens_raw %>% 
+  #mutate(., child_id = group_indices(., corpus, child)) %>% 
+  group_by(corpus, child) %>% 
+  mutate(corpus_child = paste(corpus, child, sep = "_")) %>% 
+  ungroup()
+
+by_kid2 <- by_kid1 %>% 
+  dplyr::select(corpus_child, word) %>% 
+  group_by(corpus_child) %>% 
+  add_count(word) %>% 
+  distinct(corpus_child, word, .keep_all = TRUE) %>% 
+  ungroup()
+
+
+by_kid3 <- by_kid2 %>% 
+  group_by(corpus_child) %>% 
+  add_tally(n) %>% 
+  ungroup() %>% 
+  rename(N = nn) %>% 
+  mutate(freq = n/N,
+         trns_freq = log10(freq + 1))
+
+```
+
+
+```{r}
+td_matrix_bykid <- by_kid3 %>% 
+  dplyr::select(word, corpus_child, trns_freq) %>% 
+  spread(key = corpus_child, value = trns_freq, fill = 0)
+
+
+M_bykid <- td_matrix_bykid %>% 
+  dplyr::select(-word) %>% 
+  cor()
+```
+
+
+```{r}
+corrplot(round(M_bykid[1:10, 1:10], 2), method = 'number', tl.srt = 45)
+```
+
+
+```{r}
+nm_mds_bykid <- isoMDS(d = 1 - M_bykid, k = 2)
+
+coords_bykid <- nm_mds_bykid$points %>% 
+  as.data.frame() %>% 
+  rename(x = V1, y = V2) %>% 
+  rownames_to_column(var = "corpus_child") %>% 
+  separate(corpus_child, c("corpus", "child"), sep = "_", remove = FALSE) 
+
+
+coords_bykid <- coords_bykid %>% 
+  mutate(corpus = ifelse(corpus == "MacWhinney", "McW",
+                         ifelse(corpus == "EllisWeismer", "EW",
+                                corpus)))
+```
+
+```{r}
+ggplot(coords_bykid, aes(x, y, label = corpus, color = corpus)) + 
+  geom_text() +
+  theme_minimal() +
+  guides(color = FALSE) 
+
+
+coords_bykid %>% 
+  mutate(corpus = ifelse(corpus_child %in% c("Cornell_Felicia", "Cornell_Rhonda", "Warren_Jmarkey",
+                                           "Cornell_Sarah", "Warren_Gina", "Warren_Mary",
+                                           "Warren_David", "Warren_Louise"), "REMOVE", corpus)) %>% 
+  ggplot(aes(x, y, label = corpus, color = corpus)) +
+  geom_text() +
+  theme_minimal() +
+  guides(color = FALSE)
+
+
+ggplot(coords_bykid, aes(x, y, label = corpus, color = corpus)) +
+  geom_text(size = 3.5) +
+  xlim(-0.75, 1) +
+  ylim(-0.75, 1) +
+  theme_minimal() +
+  guides(color = FALSE) +
+  labs(title = "ZOOMED IN")
+```
+
+
+# Grouping by corpus only - remove none
+```{r}
+by_corpus1 <- tokens_raw %>% 
+  dplyr::select(corpus, word) %>% 
+  group_by(corpus) %>% 
+  add_count(word) %>% 
+  distinct(corpus, word, .keep_all = TRUE) %>% 
+  ungroup()
+
+
+by_corpus2 <- by_corpus1 %>% 
+  group_by(corpus) %>% 
+  add_tally(n) %>% 
+  ungroup() %>% 
+  rename(N = nn) %>% 
+  mutate(freq = n/N,
+         trns_freq = log10(freq + 1))
+
+```
+
+
+```{r}
+td_matrix_bycorpus <- by_corpus2 %>% 
+  dplyr::select(word, corpus, trns_freq) %>% 
+  spread(key = corpus, value = trns_freq, fill = 0)
+
+
+M_bycorpus <- td_matrix_bycorpus %>% 
+  dplyr::select(-word) %>% 
+  cor()
+```
+
+
+```{r}
+corrplot(round(M_bycorpus, 2), method = 'number', tl.srt = 45)
+```
+
+
+```{r}
+nm_mds_bycorpus <- isoMDS(d = 1 - M_bycorpus, k = 2)
+
+coords_bycorpus <- nm_mds_bycorpus$points %>% 
+  as.data.frame() %>% 
+  rename(x = V1, y = V2) %>% 
+  rownames_to_column(var = "corpus")
+```
+
+```{r}
+ggplot(coords_bycorpus, aes(x, y, label = corpus, color = corpus)) + 
+  geom_point(alpha = 0.7) +
+  geom_text_repel() +
+  theme_minimal() +
+  guides(color = FALSE) 
+```
+
+
+# Grouping by corpus only - remove outliers
+```{r}
+outliers <- c("Cornell_Felicia", "Cornell_Rhonda", "Warren_Jmarkey",
+                                           "Cornell_Sarah", "Warren_Gina", "Warren_Mary",
+                                           "Warren_David", "Warren_Louise")
+
+
+removed1 <- tokens_raw %>% 
+  filter(!paste(corpus, child, sep = "_") %in% outliers) %>% 
+  dplyr::select(corpus, word) %>% 
+  group_by(corpus) %>% 
+  add_count(word) %>% 
+  distinct(corpus, word, .keep_all = TRUE) %>% 
+  ungroup()
+
+
+removed2 <- removed1 %>% 
+  group_by(corpus) %>% 
+  add_tally(n) %>% 
+  ungroup() %>% 
+  rename(N = nn) %>% 
+  mutate(freq = n/N,
+         trns_freq = log10(freq + 1))
+
+```
+
+
+```{r}
+td_matrix_removed <- removed2 %>% 
+  dplyr::select(word, corpus, trns_freq) %>% 
+  spread(key = corpus, value = trns_freq, fill = 0)
+
+
+M_removed <- td_matrix_removed %>% 
+  dplyr::select(-word) %>% 
+  cor()
+```
+
+
+```{r}
+corrplot(round(M_removed, 2), method = 'number', tl.srt = 45)
+```
+
+
+```{r}
+nm_mds_removed <- isoMDS(d = 1 - M_removed, k = 2)
+
+coords_removed <- nm_mds_removed$points %>% 
+  as.data.frame() %>% 
+  rename(x = V1, y = V2) %>% 
+  rownames_to_column(var = "corpus")
+```
+
+```{r}
+ggplot(coords_removed, aes(x, y, label = corpus, color = corpus)) + 
+  geom_point(alpha = 0.7) +
+  geom_text_repel() +
+  theme_minimal() +
+  guides(color = FALSE) 
+```
+
+
+
+
+## Visualizations {.tabset}
+### corpus
+```{r echo = FALSE}
+ggplot(coords_bycorpus, aes(x, y, label = corpus, color = corpus)) + 
+  geom_point(alpha = 0.7) +
+  geom_text_repel() +
+  theme_minimal() +
+  guides(color = FALSE) +
+  labs(title = "Grouped by corpus")
+```
+
+### corpus + child
+```{r echo = FALSE}
+ggplot(coords_bykid, aes(x, y, label = corpus, color = corpus)) + 
+  geom_text() +
+  theme_minimal() +
+  guides(color = FALSE) +
+  labs(title = "Grouped by corpus & child")
+```
+
+### corpus + child outliers removed
+```{r echo = FALSE}
+ggplot(coords_removed, aes(x, y, label = corpus, color = corpus)) + 
+  geom_point(alpha = 0.7) +
+  geom_text_repel() +
+  theme_minimal() +
+  guides(color = FALSE) +
+  labs(title = "Grouped by corpus with outliers from plot 1 removed")
+
+```
+

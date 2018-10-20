@@ -1,0 +1,198 @@
+---
+title: "Jan/Grace Weekly Meeting"
+author: "Grace Lawley"
+date: "9/9/2018"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, dpi = 300, fig.height = 10, fig.width = 10, message = FALSE)
+
+library(MASS)
+library(tidyverse)
+library(glue)
+library(here)
+library(ggrepel)
+library(corrplot)
+```
+
+
+
+```{r}
+mappings_in_path <- here("data/processed/childes/all_types_norm_mappings.csv")
+tokens_in_path <- here("data/processed/childes/all_tokens_post-norm.csv")
+
+
+mappings <- read_csv(mappings_in_path)
+tokens_raw <- read_csv(tokens_in_path)
+
+```
+
+# Grouping by corpus AND child
+
+```{r}
+by_kid1 <- tokens_raw %>% 
+  #mutate(., child_id = group_indices(., corpus, child)) %>% 
+  group_by(corpus, child) %>% 
+  mutate(corpus_child = paste(corpus, child, sep = "_")) %>% 
+  ungroup()
+
+by_kid2 <- by_kid1 %>% 
+  dplyr::select(corpus_child, word) %>% 
+  group_by(corpus_child) %>% 
+  add_count(word) %>% 
+  distinct(corpus_child, word, .keep_all = TRUE) %>% 
+  ungroup()
+
+
+by_kid3 <- by_kid2 %>% 
+  group_by(corpus_child) %>% 
+  add_tally(n) %>% 
+  ungroup() %>% 
+  rename(N = nn) %>% 
+  mutate(freq = n/N,
+         trns_freq = log10(freq + 1))
+
+```
+
+
+```{r}
+td_matrix_bykid <- by_kid3 %>% 
+  dplyr::select(word, corpus_child, trns_freq) %>% 
+  spread(key = corpus_child, value = trns_freq, fill = 0)
+
+
+M_bykid <- td_matrix_bykid %>% 
+  dplyr::select(-word) %>% 
+  cor()
+```
+
+
+```{r}
+corrplot(round(M_bykid[1:10, 1:10], 2), method = 'number', tl.srt = 45)
+```
+
+
+```{r}
+nm_mds_bykid <- isoMDS(d = 1 - M_bykid, k = 2)
+
+coords_bykid <- nm_mds_bykid$points %>% 
+  as.data.frame() %>% 
+  rename(x = V1, y = V2) %>% 
+  rownames_to_column(var = "corpus_child") %>% 
+  separate(corpus_child, c("corpus", "child"), sep = "_", remove = FALSE) 
+
+
+coords_bykid <- coords_bykid %>% 
+  mutate(corpus = ifelse(corpus == "MacWhinney", "McW",
+                         ifelse(corpus == "EllisWeismer", "EW",
+                                corpus)))
+```
+
+```{r}
+
+ggplot(coords_bykid, aes(x, y, label = corpus, color = corpus)) + 
+  geom_text() +
+  theme_minimal() +
+  guides(color = FALSE) +
+  coord_cartesian(xlim = c(-2, 1.5), ylim = c(-3.5, 1))
+
+
+ggplot(coords_bykid, aes(x, y)) +
+  geom_bin2d(binwidth = c(0.2, 0.2)) +
+  scale_fill_continuous(low = "lavender", high = "darkslategray4") +
+  theme_minimal() +
+  labs(title = '"Heatmap of 2d bin counts"', caption = "binwidth = 0.2 x 0.2") +
+  coord_cartesian(xlim = c(-2, 1.5), ylim = c(-3.5, 1))
+
+ggplot(coords_bykid, aes(x, y)) +
+  geom_density2d() +
+  theme_minimal() +
+  labs(title = '"Contours of a 2d density estimate"',
+       caption = "NOTE: change in scale!")
+
+ggplot(coords_bykid, aes(x, y)) +
+  stat_density_2d(aes(fill = ..level..), geom = "polygon", colour="white") +
+  labs(title = '"Contours of a 2d density estimate" with color',
+       caption = "NOTE: change in scale!")
+
+
+ggplot(coords_bykid, aes(x, y)) +
+  geom_hex() +
+  scale_fill_continuous(low = "lavender", high = "darkslategray4") +
+  theme_minimal() +
+  labs(title = '"Hexagonal heatmap of 2d bin counts"') +
+  coord_cartesian(xlim = c(-2, 1.5), ylim = c(-3.5, 1)) 
+
+```
+
+
+# Changing k=2 to k=3
+
+```{r}
+nm_mds_bykid2 <- isoMDS(d = 1 - M_bykid, k = 3)
+
+coords_bykid2 <- nm_mds_bykid2$points %>% 
+  as.data.frame() %>% 
+  rename(x = V1, y = V2) %>% 
+  rownames_to_column(var = "corpus_child") %>% 
+  separate(corpus_child, c("corpus", "child"), sep = "_", remove = FALSE) 
+
+
+coords_bykid2 <- coords_bykid2 %>% 
+  mutate(corpus = ifelse(corpus == "MacWhinney", "McW",
+                         ifelse(corpus == "EllisWeismer", "EW",
+                                corpus)))
+```
+
+```{r}
+ggplot(coords_bykid2, aes(x, y, label = corpus, color = corpus)) + 
+  geom_text() +
+  theme_minimal() +
+  guides(color = FALSE) +
+  coord_cartesian(xlim = c(-2, 1.5), ylim = c(-3.5, 1)) +
+  labs(title = "k=3")
+
+ggplot(coords_bykid2, aes(x, y)) +
+  geom_bin2d(binwidth = c(0.2, 0.2)) +
+  scale_fill_continuous(low = "lavender", high = "darkslategray4") +
+  theme_minimal() +
+  labs(title = '"Heatmap of 2d bin counts"', caption = "binwidth = 0.2 x 0.2",
+       subtitle = "k=3") +
+  coord_cartesian(xlim = c(-2, 1.5), ylim = c(-3.5, 1))
+
+ggplot(coords_bykid2, aes(x, y)) +
+  geom_density2d() +
+  theme_minimal() +
+  labs(title = '"Contours of a 2d density estimate"',
+       caption = "NOTE: change in scale!",
+       subtitle = "k=3")
+
+ggplot(coords_bykid2, aes(x, y)) +
+  stat_density_2d(aes(fill = ..level..), geom = "polygon", colour="white") +
+  labs(title = '"Contours of a 2d density estimate" with color',
+       caption = "NOTE: change in scale!",
+       subtitle = "k=3")
+
+
+ggplot(coords_bykid2, aes(x, y)) +
+  geom_hex() +
+  scale_fill_continuous(low = "lavender", high = "darkslategray4") +
+  theme_minimal() +
+  labs(title = '"Hexagonal heatmap of 2d bin counts"',
+       subtitle = "k=3") +
+  coord_cartesian(xlim = c(-2, 1.5), ylim = c(-3.5, 1)) 
+```
+
+# plotting 3 variables
+* geom_contour()
+* geom_raster()
+* geom_tile()
+
+# Resources:
+* https://www.r-graph-gallery.com/2d-density-plot-with-ggplot2/  
+* https://www.r-bloggers.com/smoothscatter-with-ggplot2/  
+* https://stackoverflow.com/questions/5972527/r-xy-scatter-plot-in-3d-using-density
+* https://ggplot2.tidyverse.org/reference/geom_contour.html
+
